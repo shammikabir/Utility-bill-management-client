@@ -38,10 +38,12 @@ const Categories = () => {
     <div>
       <section
         className={`py-16  md:px-12 transition-colors  duration-500 ${
-          darkMode ? "bg-gray-900 text-gray-100" : "bg-white text-gray-800"
+          darkMode
+            ? "bg-linear-to-r from-gray-950 via-gray-900 to-gray-950  text-gray-100"
+            : "bg-white text-gray-800"
         }`}
       >
-        <h2 className="text-4xl font-bold text-center mb-10 libre-baskerville-bold ">
+        <h2 className="text-4xl font-bold text-center libre-baskerville-bold md:mt-20 md:mb-20  mt-5 mb-5">
           Choose Your <span className="text-blue-600">Category</span>
         </h2>
 

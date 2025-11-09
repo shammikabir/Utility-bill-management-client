@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import ThemeContext from "../ThemeContext/ThemeContext";
+import banner1 from "../assets/faq-removebg-preview.png";
+import banner2 from "../assets/banner2.png";
 
 const Banner = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -9,17 +11,17 @@ const Banner = () => {
     {
       title: "Utility Bills Payment",
       desc: "Pay all your utility bills easily and securely in just one click. No more long queues or waiting time.",
-      img: "https://cdn3d.iconscout.com/3d/premium/thumb/electricity-bill-payment-3d-illustration-download-in-png-blend-fbx-gltf-formats--energy-meter-financial-transaction-pack-business-illustrations-5472323.png",
+      img: banner1,
     },
     {
       title: "Fast & Secure Transactions",
       desc: "Experience lightning-fast payments with our secure and user-friendly platform.",
-      img: "https://cdn3d.iconscout.com/3d/premium/thumb/secure-payment-3d-icon-download-in-png-blend-fbx-gltf-formats--mobile-wallet-money-transaction-pack-business-icons-5472335.png",
+      img: banner2,
     },
     {
       title: "Manage All Bills in One Place",
       desc: "Track and manage your electricity, water, and gas bills effortlessly from one dashboard.",
-      img: "https://cdn3d.iconscout.com/3d/premium/thumb/online-banking-3d-illustration-download-in-png-blend-fbx-gltf-formats--internet-money-financial-transaction-pack-business-illustrations-5472357.png",
+      img: banner1,
     },
   ];
 
@@ -35,11 +37,11 @@ const Banner = () => {
     <div
       className={`transition-all duration-700 ease-in-out ${
         darkMode
-          ? "bg-gray-900 text-white"
-          : "bg-gradient-to-r from-blue-50 to-blue-100"
+          ? "bg-linear-to-r from-gray-950 via-gray-900 to-gray-950  text-white"
+          : "bg-linear-to-r from-blue-50 to-blue-100"
       }`}
     >
-      <section className="flex flex-col md:flex-row justify-between items-center px-10 py-16">
+      <section className="flex flex-col md:flex-row justify-between items-center px-10 py-10 w-11/12 mx-auto ">
         {/* Left Side Text */}
         <div className="max-w-xl text-center md:text-left">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
@@ -61,7 +63,7 @@ const Banner = () => {
           <img
             src={slides[currentSlide].img}
             alt="Banner Illustration"
-            className="w-[320px] md:w-[420px] transition-transform duration-700"
+            className="w-[320px] md:w-full transition-transform duration-700"
           />
         </div>
       </section>

@@ -4,6 +4,7 @@ import Home from "../pages/Home";
 import AuthenticationLayout from "../Layout/AuthenticationLayout";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import Billdetails from "../pages/Billdetails";
 
 export const router = createBrowserRouter([
   {
@@ -13,7 +14,11 @@ export const router = createBrowserRouter([
       {
         index: true,
         Component: Home,
-        loader: () => fetch("http://localhost:3000/models"),
+        loader: () => fetch("http://localhost:3000/bills"),
+      },
+      {
+        path: "/bills/:id",
+        Component: Billdetails,
       },
     ],
   },

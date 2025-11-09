@@ -1,61 +1,90 @@
 import { useState, useContext } from "react";
-import { FiMenu, FiX, FiSun, FiMoon, FiSearch } from "react-icons/fi";
+import { FiMenu, FiX, FiSun, FiMoon, FiLogOut, FiSearch } from "react-icons/fi";
+import { FaUserCircle } from "react-icons/fa";
 import ThemeContext from "../ThemeContext/ThemeContext";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Change to true after login
   const { darkMode, toggleDarkMode } = useContext(ThemeContext);
+
+  const menuItemsBeforeLogin = ["Home", "Bills", "Login", "Register"];
+  const menuItemsAfterLogin = ["Home", "Bills", "My Pay Bills"];
 
   return (
     <div
       className={`${
-        darkMode ? "bg-gray-900 text-gray-100" : "bg-white text-gray-800"
-      } w-full shadow-md transition-colors duration-500`}
+        darkMode
+          ? "bg-linear-to-r from-gray-950 via-gray-900 to-gray-950  text-gray-100"
+          : "bg-white text-gray-800"
+      } transition-colors duration-500 shadow-md`}
     >
-      <nav className="flex justify-between items-center px-6 py-4">
-        <div className="text-2xl font-bold flex items-center gap-2">
-          <span
-            className={`w-8 h-8 flex items-center justify-center rounded-full ${
+      <nav className="flex justify-between items-center w-11/12 mx-auto py-4">
+        {/* Logo */}
+        <div className="flex items-center gap-2 text-2xl font-bold">
+          <div
+            className={`w-9 h-9 flex items-center justify-center rounded-xl shadow-md ${
               darkMode
                 ? "bg-orange-400 text-gray-900"
                 : "bg-blue-600 text-white"
             }`}
           >
             ⚡
-          </span>
-          <span className={`${darkMode ? "text-orange-400" : "text-blue-600"}`}>
+          </div>
+          <span
+            className={`${
+              darkMode ? "text-orange-400" : "text-blue-600"
+            } tracking-wide`}
+          >
             PowerPay
           </span>
         </div>
 
-        <ul className="hidden md:flex gap-8 font-medium">
-          {["About", "Our Service", "Career", "Partnership", "Contact"].map(
+        {/* Desktop Menu */}
+        <ul className="hidden md:flex gap-8 font-medium items-center">
+          {(isLoggedIn ? menuItemsAfterLogin : menuItemsBeforeLogin).map(
             (item) => (
               <li
                 key={item}
-                className={`cursor-pointer hover:${
-                  darkMode ? "text-orange-400" : "text-blue-600"
+                className={`cursor-pointer hover:scale-105 transition-all ${
+                  darkMode ? "hover:text-orange-400" : "hover:text-blue-600"
                 }`}
               >
                 {item}
               </li>
             )
           )}
-        </ul>
 
-        <div className="hidden md:flex gap-4 items-center">
-          <FiSearch className="text-xl cursor-pointer hover:text-blue-600" />
+          {/* Search Icon */}
+          <FiSearch className="text-lg cursor-pointer hover:text-blue-600 transition" />
+
+          {/* Theme Toggle */}
           <button
             onClick={toggleDarkMode}
-            className="text-2xl p-2 rounded-full border hover:bg-gray-200 dark:hover:bg-gray-700"
+            className="text-xl p-2 rounded-full border hover:bg-gray-200 dark:hover:bg-gray-700 transition"
           >
             {darkMode ? <FiSun /> : <FiMoon />}
           </button>
-          <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-            Login
-          </button>
-        </div>
 
+          {/* Profile or Login */}
+          {isLoggedIn ? (
+            <div className="flex items-center gap-3">
+              <FaUserCircle className="text-3xl cursor-pointer hover:text-orange-400" />
+              <button
+                onClick={() => setIsLoggedIn(false)}
+                className="flex items-center gap-1 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
+              >
+                <FiLogOut /> Logout
+              </button>
+            </div>
+          ) : (
+            <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+              Login
+            </button>
+          )}
+        </ul>
+
+        {/* Mobile Menu Button */}
         <button
           className="md:hidden text-2xl"
           onClick={() => setMenuOpen(!menuOpen)}
@@ -64,20 +93,45 @@ export default function Navbar() {
         </button>
       </nav>
 
+      {/* Mobile Dropdown */}
       {menuOpen && (
         <div
           className={`md:hidden ${
-            darkMode ? "bg-gray-800" : "bg-white"
-          } shadow-lg px-6 py-4 space-y-4`}
+            darkMode ? "bg-gray-800 text-gray-100" : "bg-white text-gray-800"
+          } shadow-lg px-6 py-4 space-y-3 transition-all duration-300`}
         >
-          {["About", "Our Service", "Career", "Partnership", "Contact"].map(
+          {(isLoggedIn ? menuItemsAfterLogin : menuItemsBeforeLogin).map(
             (item) => (
-              <p key={item}>{item}</p>
+              <p
+                key={item}
+                className={`cursor-pointer hover:pl-2 transition-all ${
+                  darkMode ? "hover:text-orange-400" : "hover:text-blue-600"
+                }`}
+              >
+                {item}
+              </p>
             )
           )}
-          <button className="w-full bg-blue-600 text-white py-2 rounded-lg">
-            Login
-          </button>
+          <div className="flex items-center justify-between mt-3">
+            <button
+              onClick={toggleDarkMode}
+              className="text-xl p-2 rounded-full border hover:bg-gray-200 dark:hover:bg-gray-700"
+            >
+              {darkMode ? <FiSun /> : <FiMoon />}
+            </button>
+            {isLoggedIn ? (
+              <button
+                onClick={() => setIsLoggedIn(false)}
+                className="flex items-center gap-1 px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600 text-sm"
+              >
+                <FiLogOut /> Logout
+              </button>
+            ) : (
+              <button className="w-1/3 bg-blue-600 text-white py-1 rounded-lg hover:bg-blue-700 text-sm">
+                Login
+              </button>
+            )}
+          </div>
         </div>
       )}
     </div>
