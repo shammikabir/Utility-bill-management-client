@@ -5,6 +5,7 @@ import AuthenticationLayout from "../Layout/AuthenticationLayout";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Billdetails from "../pages/Billdetails";
+import BillsPage from "../pages/BillsPage";
 
 export const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ export const router = createBrowserRouter([
       {
         path: "/bills/:id",
         Component: Billdetails,
+      },
+      {
+        path: "/bills",
+        Component: BillsPage,
       },
     ],
   },

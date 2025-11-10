@@ -5,7 +5,7 @@ import {
   FaMobileAlt,
 } from "react-icons/fa";
 import { useContext } from "react";
-import { motion } from "framer-motion";
+
 import ThemeContext from "../ThemeContext/ThemeContext";
 import chooseImage from "../assets/WhatsApp_Image_2025-11-09_at_11.36.55_PM-removebg-preview.png"; // 🖼️ your image path here
 
@@ -16,8 +16,8 @@ const WhyChooseUs = () => {
     <section
       className={`py-20 px-6 md:px-20 transition-all duration-500 ${
         darkMode
-          ? "bg-gradient-to-r from-gray-950 via-gray-900 to-gray-950 text-gray-100"
-          : "bg-gradient-to-r from-blue-50 via-white to-blue-50 text-gray-800"
+          ? "bg-linear-to-r from-gray-950 via-gray-900 to-gray-950 text-gray-100"
+          : "bg-linear-to-r from-blue-50 via-white to-blue-50 text-gray-800"
       }`}
     >
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -45,7 +45,7 @@ const WhyChooseUs = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             {/* Feature 1 */}
-            <motion.div
+            <div
               whileHover={{ scale: 1.05 }}
               className={`p-6 rounded-2xl shadow-md ${
                 darkMode
@@ -67,10 +67,10 @@ const WhyChooseUs = () => {
                 Every transaction is encrypted and protected with top-tier
                 security.
               </p>
-            </motion.div>
+            </div>
 
             {/* Feature 2 */}
-            <motion.div
+            <div
               whileHover={{ scale: 1.05 }}
               className={`p-6 rounded-2xl shadow-md ${
                 darkMode
@@ -91,10 +91,10 @@ const WhyChooseUs = () => {
               >
                 Pay your bills in seconds with our optimized system.
               </p>
-            </motion.div>
+            </div>
 
             {/* Feature 3 */}
-            <motion.div
+            <div
               whileHover={{ scale: 1.05 }}
               className={`p-6 rounded-2xl shadow-md ${
                 darkMode
@@ -115,10 +115,10 @@ const WhyChooseUs = () => {
               >
                 Access your payment history and download reports anytime.
               </p>
-            </motion.div>
+            </div>
 
             {/* Feature 4 */}
-            <motion.div
+            <div
               whileHover={{ scale: 1.05 }}
               className={`p-6 rounded-2xl shadow-md ${
                 darkMode
@@ -139,12 +139,12 @@ const WhyChooseUs = () => {
               >
                 Manage your bills anytime, anywhere from any device.
               </p>
-            </motion.div>
+            </div>
           </div>
         </div>
 
         {/* Right Side Image */}
-        <motion.div
+        <div
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
@@ -155,7 +155,7 @@ const WhyChooseUs = () => {
             alt="Why choose us illustration"
             className="w-10/12 md:w-11/12  transition-transform duration-300"
           />
-        </motion.div>
+        </div>
       </div>
     </section>
   );

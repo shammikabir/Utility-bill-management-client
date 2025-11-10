@@ -5,8 +5,7 @@ import banner2 from "../assets/banner2.png";
 
 const Banner = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const { darkMode } = useContext(ThemeContext); // Use global dark mode
-
+  const { darkMode } = useContext(ThemeContext);
   const slides = [
     {
       title: "Utility Bills Payment",

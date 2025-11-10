@@ -1,4 +1,5 @@
 import { useState, useContext } from "react";
+import { NavLink } from "react-router-dom";
 import { FiMenu, FiX, FiSun, FiMoon, FiLogOut, FiSearch } from "react-icons/fi";
 import { FaUserCircle } from "react-icons/fa";
 import ThemeContext from "../ThemeContext/ThemeContext";
@@ -8,14 +9,11 @@ export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Change to true after login
   const { darkMode, toggleDarkMode } = useContext(ThemeContext);
 
-  const menuItemsBeforeLogin = ["Home", "Bills", "Login", "Register"];
-  const menuItemsAfterLogin = ["Home", "Bills", "My Pay Bills"];
-
   return (
     <div
       className={`${
         darkMode
-          ? "bg-linear-to-r from-gray-950 via-gray-900 to-gray-950  text-gray-100"
+          ? "bg-gradient-to-r from-gray-950 via-gray-900 to-gray-950 text-gray-100"
           : "bg-white text-gray-800"
       } transition-colors duration-500 shadow-md`}
     >
@@ -42,17 +40,124 @@ export default function Navbar() {
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex gap-8 font-medium items-center">
-          {(isLoggedIn ? menuItemsAfterLogin : menuItemsBeforeLogin).map(
-            (item) => (
-              <li
-                key={item}
-                className={`cursor-pointer hover:scale-105 transition-all ${
-                  darkMode ? "hover:text-orange-400" : "hover:text-blue-600"
-                }`}
+          {isLoggedIn ? (
+            <>
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  `cursor-pointer transition-all ${
+                    isActive
+                      ? darkMode
+                        ? "text-orange-400"
+                        : "text-blue-600"
+                      : darkMode
+                      ? "hover:text-orange-400"
+                      : "hover:text-blue-600"
+                  }`
+                }
               >
-                {item}
-              </li>
-            )
+                Home
+              </NavLink>
+              <NavLink
+                to="/bills"
+                className={({ isActive }) =>
+                  `cursor-pointer transition-all ${
+                    isActive
+                      ? darkMode
+                        ? "text-orange-400"
+                        : "text-blue-600"
+                      : darkMode
+                      ? "hover:text-orange-400"
+                      : "hover:text-blue-600"
+                  }`
+                }
+              >
+                Bills
+              </NavLink>
+              <NavLink
+                to="/mypaybills"
+                className={({ isActive }) =>
+                  `cursor-pointer transition-all ${
+                    isActive
+                      ? darkMode
+                        ? "text-orange-400"
+                        : "text-blue-600"
+                      : darkMode
+                      ? "hover:text-orange-400"
+                      : "hover:text-blue-600"
+                  }`
+                }
+              >
+                My Pay Bills
+              </NavLink>
+            </>
+          ) : (
+            <>
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  `cursor-pointer transition-all ${
+                    isActive
+                      ? darkMode
+                        ? "text-orange-400"
+                        : "text-blue-600"
+                      : darkMode
+                      ? "hover:text-orange-400"
+                      : "hover:text-blue-600"
+                  }`
+                }
+              >
+                Home
+              </NavLink>
+              <NavLink
+                to="/bills"
+                className={({ isActive }) =>
+                  `cursor-pointer transition-all ${
+                    isActive
+                      ? darkMode
+                        ? "text-orange-400"
+                        : "text-blue-600"
+                      : darkMode
+                      ? "hover:text-orange-400"
+                      : "hover:text-blue-600"
+                  }`
+                }
+              >
+                Bills
+              </NavLink>
+              <NavLink
+                to="/login"
+                className={({ isActive }) =>
+                  `cursor-pointer transition-all ${
+                    isActive
+                      ? darkMode
+                        ? "text-orange-400"
+                        : "text-blue-600"
+                      : darkMode
+                      ? "hover:text-orange-400"
+                      : "hover:text-blue-600"
+                  }`
+                }
+              >
+                Login
+              </NavLink>
+              <NavLink
+                to="/register"
+                className={({ isActive }) =>
+                  `cursor-pointer transition-all ${
+                    isActive
+                      ? darkMode
+                        ? "text-orange-400"
+                        : "text-blue-600"
+                      : darkMode
+                      ? "hover:text-orange-400"
+                      : "hover:text-blue-600"
+                  }`
+                }
+              >
+                Register
+              </NavLink>
+            </>
           )}
 
           {/* Search Icon */}
@@ -78,9 +183,11 @@ export default function Navbar() {
               </button>
             </div>
           ) : (
-            <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
-              Login
-            </button>
+            <NavLink to="/login">
+              <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                Login
+              </button>
+            </NavLink>
           )}
         </ul>
 
@@ -100,18 +207,63 @@ export default function Navbar() {
             darkMode ? "bg-gray-800 text-gray-100" : "bg-white text-gray-800"
           } shadow-lg px-6 py-4 space-y-3 transition-all duration-300`}
         >
-          {(isLoggedIn ? menuItemsAfterLogin : menuItemsBeforeLogin).map(
-            (item) => (
-              <p
-                key={item}
-                className={`cursor-pointer hover:pl-2 transition-all ${
-                  darkMode ? "hover:text-orange-400" : "hover:text-blue-600"
-                }`}
+          {isLoggedIn ? (
+            <>
+              <NavLink
+                to="/"
+                onClick={() => setMenuOpen(false)}
+                className="block hover:pl-2 transition-all"
               >
-                {item}
-              </p>
-            )
+                Home
+              </NavLink>
+              <NavLink
+                to="/bills"
+                onClick={() => setMenuOpen(false)}
+                className="block hover:pl-2 transition-all"
+              >
+                Bills
+              </NavLink>
+              <NavLink
+                to="/mypaybills"
+                onClick={() => setMenuOpen(false)}
+                className="block hover:pl-2 transition-all"
+              >
+                My Pay Bills
+              </NavLink>
+            </>
+          ) : (
+            <>
+              <NavLink
+                to="/"
+                onClick={() => setMenuOpen(false)}
+                className="block hover:pl-2 transition-all"
+              >
+                Home
+              </NavLink>
+              <NavLink
+                to="/bills"
+                onClick={() => setMenuOpen(false)}
+                className="block hover:pl-2 transition-all"
+              >
+                Bills
+              </NavLink>
+              <NavLink
+                to="/login"
+                onClick={() => setMenuOpen(false)}
+                className="block hover:pl-2 transition-all"
+              >
+                Login
+              </NavLink>
+              <NavLink
+                to="/auth/register"
+                onClick={() => setMenuOpen(false)}
+                className="block hover:pl-2 transition-all"
+              >
+                Register
+              </NavLink>
+            </>
           )}
+
           <div className="flex items-center justify-between mt-3">
             <button
               onClick={toggleDarkMode}
@@ -119,6 +271,7 @@ export default function Navbar() {
             >
               {darkMode ? <FiSun /> : <FiMoon />}
             </button>
+
             {isLoggedIn ? (
               <button
                 onClick={() => setIsLoggedIn(false)}
@@ -127,9 +280,11 @@ export default function Navbar() {
                 <FiLogOut /> Logout
               </button>
             ) : (
-              <button className="w-1/3 bg-blue-600 text-white py-1 rounded-lg hover:bg-blue-700 text-sm">
-                Login
-              </button>
+              <NavLink to="/auth/login">
+                <button className="w-1/3 bg-blue-600 text-white py-1 rounded-lg hover:bg-blue-700 text-sm">
+                  Login
+                </button>
+              </NavLink>
             )}
           </div>
         </div>

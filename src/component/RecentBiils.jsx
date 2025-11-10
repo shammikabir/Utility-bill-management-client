@@ -6,7 +6,6 @@ import { FaMoneyBill1Wave } from "react-icons/fa6";
 const RecentBiils = () => {
   const { darkMode } = useContext(ThemeContext);
   const bills = useLoaderData();
-  console.log(bills);
 
   return (
     <section
