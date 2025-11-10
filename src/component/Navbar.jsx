@@ -3,17 +3,18 @@ import { NavLink } from "react-router-dom";
 import { FiMenu, FiX, FiSun, FiMoon, FiLogOut, FiSearch } from "react-icons/fi";
 import { FaUserCircle } from "react-icons/fa";
 import ThemeContext from "../ThemeContext/ThemeContext";
+import { AuthContext } from "../Provider/AuthContext";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Change to true after login
+  const { user, logOut } = useContext(AuthContext); // Change to true after login
   const { darkMode, toggleDarkMode } = useContext(ThemeContext);
 
   return (
     <div
       className={`${
         darkMode
-          ? "bg-gradient-to-r from-gray-950 via-gray-900 to-gray-950 text-gray-100"
+          ? "bg-linear-to-r from-gray-950 via-gray-900 to-gray-950 text-gray-100"
           : "bg-white text-gray-800"
       } transition-colors duration-500 shadow-md`}
     >
@@ -40,7 +41,7 @@ export default function Navbar() {
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex gap-8 font-medium items-center">
-          {isLoggedIn ? (
+          {user ? (
             <>
               <NavLink
                 to="/"
@@ -126,7 +127,7 @@ export default function Navbar() {
                 Bills
               </NavLink>
               <NavLink
-                to="/login"
+                to="/auth/login"
                 className={({ isActive }) =>
                   `cursor-pointer transition-all ${
                     isActive
@@ -142,7 +143,7 @@ export default function Navbar() {
                 Login
               </NavLink>
               <NavLink
-                to="/register"
+                to="/auth/register"
                 className={({ isActive }) =>
                   `cursor-pointer transition-all ${
                     isActive
@@ -172,11 +173,11 @@ export default function Navbar() {
           </button>
 
           {/* Profile or Login */}
-          {isLoggedIn ? (
+          {user ? (
             <div className="flex items-center gap-3">
               <FaUserCircle className="text-3xl cursor-pointer hover:text-orange-400" />
               <button
-                onClick={() => setIsLoggedIn(false)}
+                // onClick={() => setIsLoggedIn(false)}
                 className="flex items-center gap-1 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
               >
                 <FiLogOut /> Logout
@@ -207,7 +208,7 @@ export default function Navbar() {
             darkMode ? "bg-gray-800 text-gray-100" : "bg-white text-gray-800"
           } shadow-lg px-6 py-4 space-y-3 transition-all duration-300`}
         >
-          {isLoggedIn ? (
+          {user ? (
             <>
               <NavLink
                 to="/"
@@ -248,7 +249,7 @@ export default function Navbar() {
                 Bills
               </NavLink>
               <NavLink
-                to="/login"
+                to="/auth/login"
                 onClick={() => setMenuOpen(false)}
                 className="block hover:pl-2 transition-all"
               >
@@ -272,9 +273,9 @@ export default function Navbar() {
               {darkMode ? <FiSun /> : <FiMoon />}
             </button>
 
-            {isLoggedIn ? (
+            {user ? (
               <button
-                onClick={() => setIsLoggedIn(false)}
+                // onClick={() => setIsLoggedIn(false)}
                 className="flex items-center gap-1 px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600 text-sm"
               >
                 <FiLogOut /> Logout

@@ -7,6 +7,8 @@ import {
   onAuthStateChanged,
   signInWithPopup,
   GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 
 const auth = getAuth(app);
@@ -29,13 +31,25 @@ const AuthProvider = ({ children }) => {
     };
   }, []);
 
+  //login
+
+  const signIn = (email, password) => {
+    // setloading(true);
+    return signInWithEmailAndPassword(auth, email, password);
+  };
+
   //google signin
 
   const signInWithEmailFunc = () => {
     setloading(true);
     return signInWithPopup(auth, googleProvider);
   };
+  //password reset
 
+  const sendPassResetEmailFunc = (email) => {
+    setloading(true);
+    return sendPasswordResetEmail(auth, email);
+  };
   const authData = {
     createuser,
     user,
@@ -43,6 +57,8 @@ const AuthProvider = ({ children }) => {
     signInWithEmailFunc,
     setloading,
     setUser,
+    signIn,
+    sendPassResetEmailFunc,
   };
 
   return <AuthContext value={authData}>{children}</AuthContext>;
