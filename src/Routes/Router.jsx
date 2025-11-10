@@ -7,6 +7,7 @@ import Register from "../pages/Register";
 import Billdetails from "../pages/Billdetails";
 import BillsPage from "../pages/BillsPage";
 import ForgotPass from "../pages/ForgetPass";
+import PrivateRoute from "../component/PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -20,7 +21,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/bills/:id",
-        Component: Billdetails,
+        element: (
+          <PrivateRoute>
+            <Billdetails></Billdetails>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/bills",

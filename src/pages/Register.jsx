@@ -2,15 +2,17 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../Provider/AuthContext";
 import { FaEye } from "react-icons/fa";
 import { IoEyeOff } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ThemeContext from "../ThemeContext/ThemeContext";
+import toast from "daisyui/components/toast";
 
 const Register = () => {
   const [passError, setPassError] = useState("");
   const [error, setError] = useState("");
   const [show, setShow] = useState(false);
   const { darkMode } = useContext(ThemeContext);
-  const { createuser, setloading, signInWithEmailFunc, setUser } =
+  const navigate = useNavigate();
+  const { createuser, setloading, signInWithEmailFunc, setUser, updateUser } =
     useContext(AuthContext);
 
   const handleGoogleSignin = () => {
@@ -45,7 +47,16 @@ const Register = () => {
     createuser(email, password)
       .then((result) => {
         setUser(result.user);
-        alert("User Registered Successfully!");
+        const user = result.user;
+
+        updateUser({ displayName: name, photoURL: photo }).then(() => {
+          setUser({ ...user, displayName: name, photoURL: photo });
+          form.reset();
+          navigate("/auth/login");
+          toast.success(
+            "Successfully Registered! Please Log In to your Account"
+          );
+        });
       })
       .catch((error) => {
         const errorCode = error.code;

@@ -4,11 +4,43 @@ import { FiMenu, FiX, FiSun, FiMoon, FiLogOut, FiSearch } from "react-icons/fi";
 import { FaUserCircle } from "react-icons/fa";
 import ThemeContext from "../ThemeContext/ThemeContext";
 import { AuthContext } from "../Provider/AuthContext";
+import Swal from "sweetalert2";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { user, logOut } = useContext(AuthContext); // Change to true after login
   const { darkMode, toggleDarkMode } = useContext(ThemeContext);
+
+  const handleLogout = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want to log out?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, log me out",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        logOut()
+          .then(() => {
+            Swal.fire({
+              title: "Logged Out!",
+              text: "You have logged out successfully.",
+              icon: "success",
+              confirmButtonText: "Ok",
+            });
+          })
+          .catch((error) => {
+            Swal.fire({
+              title: "Error!",
+              text: error.message,
+              icon: "error",
+              confirmButtonText: "Ok",
+            });
+          });
+      }
+    });
+  };
 
   return (
     <div
@@ -175,8 +207,21 @@ export default function Navbar() {
           {/* Profile or Login */}
           {user ? (
             <div className="flex items-center gap-3">
-              <FaUserCircle className="text-3xl cursor-pointer hover:text-orange-400" />
+              <img
+                src={
+                  user?.photoURL || (
+                    <FaUserCircle className="text-3xl cursor-pointer hover:text-orange-400" />
+                  )
+                }
+                alt=""
+                className="w-10 h-10 md:w-12 md:h-12 rounded-full cursor-pointer border border-[#133D31] object-cover shadow-md"
+              />
+
               <button
+                onClick={() => {
+                  handleLogout();
+                  setMenuOpen(false);
+                }}
                 // onClick={() => setIsLoggedIn(false)}
                 className="flex items-center gap-1 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
               >
@@ -275,6 +320,10 @@ export default function Navbar() {
 
             {user ? (
               <button
+                onClick={() => {
+                  handleLogout();
+                  setMenuOpen(false);
+                }}
                 // onClick={() => setIsLoggedIn(false)}
                 className="flex items-center gap-1 px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600 text-sm"
               >

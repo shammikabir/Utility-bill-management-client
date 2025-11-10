@@ -1,9 +1,152 @@
-import React from "react";
-import { useParams } from "react-router";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useParams } from "react-router";
+import {
+  FaTag,
+  FaMapMarkerAlt,
+  FaCalendarAlt,
+  FaMoneyBill,
+  FaArrowLeft,
+} from "react-icons/fa";
+import ThemeContext from "../ThemeContext/ThemeContext";
 
 const Billdetails = () => {
   const { id } = useParams();
-  return <div>hello</div>;
+  const [bill, setBill] = useState({});
+  const [loading, setLoading] = useState(true);
+  const { darkMode } = useContext(ThemeContext);
+
+  useEffect(() => {
+    fetch(`http://localhost:3000/allbills/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setBill(data.result);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-[70vh] text-xl font-semibold">
+        Loading...
+      </div>
+    );
+  }
+
+  if (!bill) {
+    return <div className="text-center text-xl mt-10">No Bill Found</div>;
+  }
+
+  // check current month match
+  const currentMonth = new Date().getMonth();
+  const billMonth = new Date(bill.date).getMonth();
+  const isCurrentMonth = currentMonth === billMonth;
+
+  return (
+    <div
+      className={`min-h-screen py-12 px-4 flex justify-center items-center ${
+        darkMode
+          ? "bg-[#0f0f0f] text-gray-100"
+          : "bg-gradient-to-b from-[#F3F8FF] via-[#FFFFFF] to-[#EDEADE] text-gray-800"
+      }`}
+    >
+      <div
+        className={`max-w-4xl w-full rounded-3xl shadow-2xl border overflow-hidden transition-all duration-300 ${
+          darkMode ? "bg-[#1b1b1b] border-gray-700" : "bg-white border-gray-200"
+        }`}
+      >
+        {/* Top Image with Gradient Overlay */}
+        <div className="relative w-full h-72 overflow-hidden">
+          <img
+            src={bill.image || "https://via.placeholder.com/800x400"}
+            alt={bill.title}
+            className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+
+          {/* Back Button */}
+          <Link
+            to="/bills"
+            className="absolute top-4 left-4 bg-white/90 text-gray-700 px-3 py-1.5 rounded-full flex items-center gap-2 text-sm shadow hover:bg-white"
+          >
+            <FaArrowLeft /> Back
+          </Link>
+
+          {/* Title on Image */}
+          <h2 className="absolute bottom-6 left-6 text-3xl md:text-4xl font-bold text-white drop-shadow-lg">
+            {bill.title}
+          </h2>
+        </div>
+
+        {/* Bill Details Section */}
+        <div className="p-8 md:p-10 space-y-6">
+          {/* Info Grid */}
+          <div className="grid sm:grid-cols-2 gap-5 text-sm md:text-base">
+            <div className="flex items-center gap-3">
+              <FaTag className="text-green-500 text-xl" />
+              <p>
+                <span className="font-semibold text-gray-500">Category:</span>{" "}
+                {bill.category}
+              </p>
+            </div>
+            <div className="flex items-center gap-3">
+              <FaMapMarkerAlt className="text-red-500 text-xl" />
+              <p>
+                <span className="font-semibold text-gray-500">Location:</span>{" "}
+                {bill.location}
+              </p>
+            </div>
+            <div className="flex items-center gap-3">
+              <FaCalendarAlt className="text-blue-500 text-xl" />
+              <p>
+                <span className="font-semibold text-gray-500">Date:</span>{" "}
+                {bill.date}
+              </p>
+            </div>
+            <div className="flex items-center gap-3">
+              <FaMoneyBill className="text-yellow-500 text-xl" />
+              <p>
+                <span className="font-semibold text-gray-500">Amount:</span>{" "}
+                <span className="font-bold text-lg">${bill.amount}</span>
+              </p>
+            </div>
+          </div>
+
+          {/* Divider */}
+          <div
+            className={`h-px ${darkMode ? "bg-gray-700" : "bg-gray-200"}`}
+          ></div>
+
+          {/* Description */}
+          <div>
+            <h3 className="text-lg font-semibold mb-2 text-blue-600">
+              Description
+            </h3>
+            <p className="leading-relaxed text-justify text-gray-600 dark:text-gray-300">
+              {bill.description ||
+                "No detailed description available for this bill."}
+            </p>
+          </div>
+
+          {/* Pay Button */}
+          <div className="text-center pt-6">
+            <button
+              disabled={!isCurrentMonth}
+              className={`px-8 py-3 rounded-xl font-semibold shadow-lg transition-all duration-300 ${
+                isCurrentMonth
+                  ? "bg-gradient-to-r from-green-500 to-green-600 text-white hover:scale-105 hover:shadow-xl"
+                  : "bg-gray-400 text-gray-200 cursor-not-allowed"
+              }`}
+            >
+              {isCurrentMonth
+                ? "💳 Pay Bill"
+                : "❌ Only current month bills can be paid"}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Billdetails;
