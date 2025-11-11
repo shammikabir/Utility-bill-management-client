@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { FiPlus, FiMinus } from "react-icons/fi";
-import faqImage from "../assets/utility-bills-people-background-electric-meter-calculator-are-counting_253334-3063.avif";
+import faqImage from "../assets/img2.png";
 import ThemeContext from "../ThemeContext/ThemeContext";
 
 export default function FAQSection() {

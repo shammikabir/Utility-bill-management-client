@@ -43,9 +43,14 @@ const Categories = () => {
             : "bg-white text-gray-800"
         }`}
       >
-        <h2 className="text-4xl font-bold text-center libre-baskerville-bold md:mt-20 md:mb-20  mt-5 mb-5">
-          Choose Your <span className="text-blue-600">Category</span>
-        </h2>
+        <div className="text-center">
+          <h2 className="text-4xl font-bold text-center libre-baskerville-bold md:mt-20 md:mb-2 mt-5 mb-2">
+            Choose Your <span className="text-blue-600">Category</span>
+          </h2>
+          <p className="text-gray-500 text-lg md:text-[16px] md:mb-20 mb-10">
+            Find the perfect utility service that suits your needs
+          </p>
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-11/12 mx-auto">
           {categories.map((cat, index) => (

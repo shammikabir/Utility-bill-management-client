@@ -15,9 +15,14 @@ const RecentBiils = () => {
           : "text-gray-800"
       }`}
     >
-      <h2 className="text-4xl font-bold text-center mb-10 libre-baskerville-bold ">
-        Recent <span className="text-orange-600">Bills</span>
-      </h2>
+      <div className="text-center">
+        <h2 className="text-4xl font-bold text-center mb-2 libre-baskerville-bold">
+          Recent <span className="text-orange-600">Bills</span>
+        </h2>
+        <p className="text-gray-500 dark:text-gray-400 text-lg md:text-[16px] md:mb-20 mb-10">
+          Check out your latest utility payments and stay up to date
+        </p>
+      </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-8 w-10/12 mx-auto mt-8">
         {bills.map((bill) => (

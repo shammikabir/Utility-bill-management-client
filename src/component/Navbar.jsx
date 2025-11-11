@@ -108,7 +108,7 @@ export default function Navbar() {
                 Bills
               </NavLink>
               <NavLink
-                to="/mypaybills"
+                to="/myPaybills"
                 className={({ isActive }) =>
                   `cursor-pointer transition-all ${
                     isActive
@@ -270,7 +270,7 @@ export default function Navbar() {
                 Bills
               </NavLink>
               <NavLink
-                to="/mypaybills"
+                to="/myPaybills"
                 onClick={() => setMenuOpen(false)}
                 className="block hover:pl-2 transition-all"
               >

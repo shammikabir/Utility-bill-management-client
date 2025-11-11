@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
 import ThemeContext from "../ThemeContext/ThemeContext";
 import banner1 from "../assets/faq-removebg-preview.png";
-import banner2 from "../assets/banner2.png";
+import banner2 from "../assets/img3.png";
+import banner3 from "../assets/img1.png";
 
 const Banner = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -20,7 +21,7 @@ const Banner = () => {
     {
       title: "Manage All Bills in One Place",
       desc: "Track and manage your electricity, water, and gas bills effortlessly from one dashboard.",
-      img: banner1,
+      img: banner3,
     },
   ];
 

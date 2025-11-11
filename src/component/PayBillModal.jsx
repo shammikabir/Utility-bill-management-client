@@ -67,7 +67,7 @@ const PayBillModal = ({ bill, onClose }) => {
             : "bg-linear-to-b from-white to-[#f8f8f8] border-gray-200 text-gray-800"
         }`}
       >
-        {/* ❌ Close Button */}
+        {/*  Close Button */}
         <button
           onClick={onClose}
           className={`absolute top-4 right-5 text-2xl transition ${
