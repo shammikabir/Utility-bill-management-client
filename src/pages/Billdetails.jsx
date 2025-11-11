@@ -8,12 +8,14 @@ import {
   FaArrowLeft,
 } from "react-icons/fa";
 import ThemeContext from "../ThemeContext/ThemeContext";
+import PayBillModal from "../component/PayBillModal";
 
 const Billdetails = () => {
   const { id } = useParams();
   const [bill, setBill] = useState({});
   const [loading, setLoading] = useState(true);
   const { darkMode } = useContext(ThemeContext);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     fetch(`http://localhost:3000/allbills/${id}`)
@@ -47,7 +49,7 @@ const Billdetails = () => {
       className={`min-h-screen py-12 px-4 flex justify-center items-center ${
         darkMode
           ? "bg-[#0f0f0f] text-gray-100"
-          : "bg-gradient-to-b from-[#F3F8FF] via-[#FFFFFF] to-[#EDEADE] text-gray-800"
+          : "bg-linear-to-b from-[#F3F8FF] via-[#FFFFFF] to-[#EDEADE] text-gray-800"
       }`}
     >
       <div
@@ -55,14 +57,14 @@ const Billdetails = () => {
           darkMode ? "bg-[#1b1b1b] border-gray-700" : "bg-white border-gray-200"
         }`}
       >
-        {/* Top Image with Gradient Overlay */}
+        {/* Top Image with linear Overlay */}
         <div className="relative w-full h-72 overflow-hidden">
           <img
             src={bill.image || "https://via.placeholder.com/800x400"}
             alt={bill.title}
             className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+          <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent"></div>
 
           {/* Back Button */}
           <Link
@@ -132,9 +134,10 @@ const Billdetails = () => {
           <div className="text-center pt-6">
             <button
               disabled={!isCurrentMonth}
+              onClick={() => setShowModal(true)}
               className={`px-8 py-3 rounded-xl font-semibold shadow-lg transition-all duration-300 ${
                 isCurrentMonth
-                  ? "bg-gradient-to-r from-green-500 to-green-600 text-white hover:scale-105 hover:shadow-xl"
+                  ? "bg-linear-to-r from-green-500 to-green-600 text-white hover:scale-105 hover:shadow-xl"
                   : "bg-gray-400 text-gray-200 cursor-not-allowed"
               }`}
             >
@@ -145,6 +148,15 @@ const Billdetails = () => {
           </div>
         </div>
       </div>
+
+      {/* Show Modal */}
+      {showModal && (
+        <PayBillModal
+          bill={bill}
+          userEmail="user@example.com"
+          onClose={() => setShowModal(false)}
+        />
+      )}
     </div>
   );
 };
