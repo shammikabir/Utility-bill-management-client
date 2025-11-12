@@ -9,7 +9,6 @@ const DeleteBills = ({
   showDeleteModal,
   selectedBill,
 }) => {
-  const { user } = useContext(AuthContext);
   const { darkMode } = useContext(ThemeContext);
 
   const handleDelete = (id) => {

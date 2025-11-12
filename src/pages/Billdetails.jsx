@@ -9,37 +9,46 @@ import {
 } from "react-icons/fa";
 import ThemeContext from "../ThemeContext/ThemeContext";
 import PayBillModal from "../component/PayBillModal";
+import ErrorBills from "./ErrorBills";
+import Loading from "./Loading";
 
 const Billdetails = () => {
   const { id } = useParams();
-  const [bill, setBill] = useState({});
+  const [bill, setBill] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   const { darkMode } = useContext(ThemeContext);
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
+    setError(false);
+
     fetch(`http://localhost:3000/allbills/${id}`)
       .then((res) => res.json())
       .then((data) => {
-        setBill(data.result);
+        if (data?.result && data.result._id) {
+          setBill(data.result);
+        } else {
+          setError(true);
+        }
         setLoading(false);
       })
-      .catch(() => setLoading(false));
+      .catch(() => {
+        setError(true);
+        setLoading(false);
+      });
   }, [id]);
 
   if (loading) {
-    return (
-      <div className="flex justify-center items-center min-h-[70vh] text-xl font-semibold">
-        Loading...
-      </div>
-    );
+    return <Loading></Loading>;
   }
 
-  if (!bill) {
-    return <div className="text-center text-xl mt-10">No Bill Found</div>;
+  if (error || !bill) {
+    return <ErrorBills />;
   }
 
-  // check current month match
+  // Check if current month
   const currentMonth = new Date().getMonth();
   const billMonth = new Date(bill.date).getMonth();
   const isCurrentMonth = currentMonth === billMonth;
@@ -49,7 +58,7 @@ const Billdetails = () => {
       className={`min-h-screen py-12 px-4 flex justify-center items-center ${
         darkMode
           ? "bg-[#0f0f0f] text-gray-100"
-          : "bg-linear-to-b from-[#F3F8FF] via-[#FFFFFF] to-[#EDEADE] text-gray-800"
+          : "bg-gradient-to-b from-[#F3F8FF] via-[#FFFFFF] to-[#EDEADE] text-gray-800"
       }`}
     >
       <div
@@ -57,14 +66,14 @@ const Billdetails = () => {
           darkMode ? "bg-[#1b1b1b] border-gray-700" : "bg-white border-gray-200"
         }`}
       >
-        {/* Top Image with linear Overlay */}
+        {/* Top Image with Overlay */}
         <div className="relative w-full h-72 overflow-hidden">
           <img
             src={bill.image || "https://via.placeholder.com/800x400"}
             alt={bill.title}
             className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500"
           />
-          <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
 
           {/* Back Button */}
           <Link
@@ -74,15 +83,14 @@ const Billdetails = () => {
             <FaArrowLeft /> Back
           </Link>
 
-          {/* Title on Image */}
+          {/* Title */}
           <h2 className="absolute bottom-6 left-6 text-3xl md:text-4xl font-bold text-white drop-shadow-lg">
             {bill.title}
           </h2>
         </div>
 
-        {/* Bill Details Section */}
+        {/* Bill Details */}
         <div className="p-8 md:p-10 space-y-6">
-          {/* Info Grid */}
           <div className="grid sm:grid-cols-2 gap-5 text-sm md:text-base">
             <div className="flex items-center gap-3">
               <FaTag className="text-green-500 text-xl" />
@@ -114,10 +122,7 @@ const Billdetails = () => {
             </div>
           </div>
 
-          {/* Divider */}
-          <div
-            className={`h-px ${darkMode ? "bg-gray-700" : "bg-gray-200"}`}
-          ></div>
+          <div className={`h-px ${darkMode ? "bg-gray-700" : "bg-gray-200"}`} />
 
           {/* Description */}
           <div>
@@ -137,7 +142,7 @@ const Billdetails = () => {
               onClick={() => setShowModal(true)}
               className={`px-8 py-3 rounded-xl font-semibold shadow-lg transition-all duration-300 ${
                 isCurrentMonth
-                  ? "bg-linear-to-r from-green-500 to-green-600 text-white hover:scale-105 hover:shadow-xl"
+                  ? "bg-gradient-to-r from-green-500 to-green-600 text-white hover:scale-105 hover:shadow-xl"
                   : "bg-gray-400 text-gray-200 cursor-not-allowed"
               }`}
             >
@@ -149,7 +154,6 @@ const Billdetails = () => {
         </div>
       </div>
 
-      {/* Show Modal */}
       {showModal && (
         <PayBillModal
           bill={bill}

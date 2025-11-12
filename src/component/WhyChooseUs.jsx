@@ -43,18 +43,18 @@ const WhyChooseUs = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {/* Feature 1 */}
             <div
               whileHover={{ scale: 1.05 }}
-              className={`p-6 rounded-2xl shadow-md ${
+              className={`p-4 rounded-[5px] shadow-md ${
                 darkMode
                   ? "bg-gray-900 border border-gray-700"
                   : "bg-white border border-blue-100"
               } transition-all duration-300`}
             >
               <FaShieldAlt
-                className={`text-4xl mb-4 ${
+                className={`text-3xl mb-2 ${
                   darkMode ? "text-orange-400" : "text-blue-600"
                 }`}
               />
@@ -71,15 +71,14 @@ const WhyChooseUs = () => {
 
             {/* Feature 2 */}
             <div
-              whileHover={{ scale: 1.05 }}
-              className={`p-6 rounded-2xl shadow-md ${
+              className={`p-4 rounded-[5px] shadow-md ${
                 darkMode
                   ? "bg-gray-900 border border-gray-700"
                   : "bg-white border border-blue-100"
               } transition-all duration-300`}
             >
               <FaBolt
-                className={`text-4xl mb-4 ${
+                className={`text-3xl mb-2 ${
                   darkMode ? "text-blue-400" : "text-orange-500"
                 }`}
               />
@@ -95,15 +94,14 @@ const WhyChooseUs = () => {
 
             {/* Feature 3 */}
             <div
-              whileHover={{ scale: 1.05 }}
-              className={`p-6 rounded-2xl shadow-md ${
+              className={`p-4 rounded-[5px] shadow-md ${
                 darkMode
                   ? "bg-gray-900 border border-gray-700"
                   : "bg-white border border-blue-100"
               } transition-all duration-300`}
             >
               <FaFileInvoiceDollar
-                className={`text-4xl mb-4 ${
+                className={`text-3xl mb-2 ${
                   darkMode ? "text-orange-400" : "text-blue-600"
                 }`}
               />
@@ -119,15 +117,14 @@ const WhyChooseUs = () => {
 
             {/* Feature 4 */}
             <div
-              whileHover={{ scale: 1.05 }}
-              className={`p-6 rounded-2xl shadow-md ${
+              className={`p-4 rounded-[5px] shadow-md ${
                 darkMode
                   ? "bg-gray-900 border border-gray-700"
                   : "bg-white border border-blue-100"
               } transition-all duration-300`}
             >
               <FaMobileAlt
-                className={`text-4xl mb-4 ${
+                className={`text-3xl mb-2 ${
                   darkMode ? "text-blue-400" : "text-orange-500"
                 }`}
               />
@@ -153,7 +150,7 @@ const WhyChooseUs = () => {
           <img
             src={chooseImage}
             alt="Why choose us illustration"
-            className="w-10/12 md:w-11/12  transition-transform duration-300"
+            className="w-10/12 md:w-full  transition-transform duration-300 "
           />
         </div>
       </div>

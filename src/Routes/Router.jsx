@@ -9,11 +9,13 @@ import BillsPage from "../pages/BillsPage";
 import ForgotPass from "../pages/ForgetPass";
 import PrivateRoute from "../component/PrivateRoute";
 import MyPayBills from "../pages/MyPayBills";
+import ErrorPage from "../pages/ErrorPage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     Component: MainLayout,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         index: true,
@@ -46,7 +48,7 @@ export const router = createBrowserRouter([
   {
     path: "/auth",
     Component: AuthenticationLayout,
-    // errorElement: <ErrorPage></ErrorPage>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/auth/login",

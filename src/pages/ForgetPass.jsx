@@ -1,9 +1,10 @@
 import React from "react";
 import { useLocation } from "react-router";
 import { useContext, useState } from "react";
-import { AuthContext } from "../Provider/authContext";
+
 import { MdOutlineResetTv } from "react-icons/md";
 import { toast } from "react-toastify";
+import { AuthContext } from "../Provider/AuthContext";
 
 const ForgotPass = () => {
   const { sendPassResetEmailFunc } = useContext(AuthContext);
