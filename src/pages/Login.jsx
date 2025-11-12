@@ -166,7 +166,7 @@ const Login = () => {
             <div className="text-right">
               <button
                 type="button"
-                onClick={handleForgetPassword}
+                // onClick={handleForgetPassword}
                 className={`text-sm text-[#b24d34] hover:underline ${
                   darkMode ? "text-white" : "text-orange-600"
                 }`}

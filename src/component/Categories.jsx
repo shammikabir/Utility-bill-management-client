@@ -1,11 +1,21 @@
-import React, { useContext } from "react";
-
-import { FiWifi, FiSmartphone, FiDroplet, FiHome, FiZap } from "react-icons/fi";
-import { FaFire } from "react-icons/fa";
+import React, { useContext, useEffect } from "react";
 import ThemeContext from "../ThemeContext/ThemeContext";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Categories = () => {
   const { darkMode } = useContext(ThemeContext);
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: false,
+      mirror: false,
+      offset: 50,
+      easing: "ease-in-out",
+    });
+  }, []);
+
   const categories = [
     {
       image:
@@ -13,14 +23,12 @@ const Categories = () => {
       title: "Electricity Bill",
       description: "Pay your electricity bills instantly and securely.",
     },
-
     {
       image:
         "https://cdn3d.iconscout.com/3d/premium/thumb/gas-bill-payment-10167366-8240166.png",
       title: "Gas Bill",
       description: "Pay gas bills in one click and never miss due dates.",
     },
-
     {
       image:
         "https://cdn3d.iconscout.com/3d/premium/thumb/internet-3d-icon-download-in-png-blend-fbx-gltf-file-formats--world-logo-browser-earth-globe-user-interface-pack-icons-5600769.png",
@@ -34,50 +42,56 @@ const Categories = () => {
       description: "Manage your water payments with ease.",
     },
   ];
-  return (
-    <div>
-      <section
-        className={`py-16  md:px-12 transition-colors  duration-500 ${
-          darkMode
-            ? "bg-linear-to-r from-gray-950 via-gray-900 to-gray-950  text-gray-100"
-            : "bg-white text-gray-800"
-        }`}
-      >
-        <div className="text-center">
-          <h2 className="text-4xl font-bold text-center libre-baskerville-bold md:mt-20 md:mb-2 mt-5 mb-2">
-            Choose Your <span className="text-blue-600">Category</span>
-          </h2>
-          <p className="text-gray-500 text-lg md:text-[16px] md:mb-20 mb-10">
-            Find the perfect utility service that suits your needs
-          </p>
-        </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-11/12 mx-auto">
-          {categories.map((cat, index) => (
-            <div
-              key={index}
-              className={`rounded-2xl overflow-hidden shadow-md cursor-pointer transition transform hover:scale-105 hover:shadow-lg border ${
-                darkMode
-                  ? "bg-gray-800 border-gray-700 hover:bg-gray-700"
-                  : "bg-white border-blue-100 hover:bg-blue-50"
-              }`}
-            >
-              <img
-                src={cat.image}
-                alt={cat.title}
-                className="w-35 h-32 mx-auto"
-              />
-              <div className="p-4 text-center">
-                <h3 className="text-lg libre-baskerville-bold  mb-1">
-                  {cat.title}
-                </h3>
-                <p className="text-sm opacity-80">{cat.description}</p>
-              </div>
+  return (
+    <section
+      className={`py-16 md:px-12 transition-colors duration-500 ${
+        darkMode
+          ? "bg-linear-to-r from-gray-950 via-gray-900 to-gray-950 text-gray-100"
+          : "bg-white text-gray-800"
+      }`}
+    >
+      <div className="text-center">
+        <h2 className="text-4xl font-bold libre-baskerville-bold md:mt-20 md:mb-2 mt-5 mb-2">
+          Choose Your <span className="text-blue-600">Category</span>
+        </h2>
+        <p className="text-gray-500 text-lg md:text-[16px] md:mb-20 mb-10">
+          Find the perfect utility service that suits your needs
+        </p>
+      </div>
+
+      <div
+        data-aos="fade-up"
+        data-aos-delay="200"
+        data-aos-duration="800"
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-11/12 mx-auto"
+      >
+        {categories.map((cat, index) => (
+          <div
+            key={index}
+            data-aos="fade-up"
+            data-aos-delay={index * 200} // delay for each card
+            className={`rounded-2xl overflow-hidden shadow-md cursor-pointer transition transform hover:scale-105 hover:shadow-lg border ${
+              darkMode
+                ? "bg-gray-800 border-gray-700 hover:bg-gray-700"
+                : "bg-white border-blue-100 hover:bg-blue-50"
+            }`}
+          >
+            <img
+              src={cat.image}
+              alt={cat.title}
+              className="w-35 h-32 mx-auto"
+            />
+            <div className="p-4 text-center">
+              <h3 className="text-lg libre-baskerville-bold mb-1">
+                {cat.title}
+              </h3>
+              <p className="text-sm opacity-80">{cat.description}</p>
             </div>
-          ))}
-        </div>
-      </section>
-    </div>
+          </div>
+        ))}
+      </div>
+    </section>
   );
 };
 

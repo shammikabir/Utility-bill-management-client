@@ -3,12 +3,14 @@ import ThemeContext from "../ThemeContext/ThemeContext";
 import { FaMapMarkerAlt, FaTag, FaDollarSign } from "react-icons/fa";
 import { FiChevronDown } from "react-icons/fi";
 import { Link } from "react-router";
+import { AuthContext } from "../Provider/AuthContext";
+import Loading from "./Loading";
 
 function BillsPage() {
   const [bills, setBills] = useState([]);
   const [category, setCategory] = useState("");
   const { darkMode } = useContext(ThemeContext);
-
+  const { loading } = useContext(AuthContext);
   //   all bills load
   useEffect(() => {
     fetch("http://localhost:3000/allbills")
@@ -88,91 +90,97 @@ function BillsPage() {
           </div>
         </div>
         {/* Bills List */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-11/12 mx-auto">
-          {bills.map((bill) => (
-            <div
-              key={bill._id}
-              className={`border rounded-2xl p-4 shadow-md hover:shadow-xl transition transform hover:-translate-y-1 
+        {loading ? (
+          <Loading></Loading>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-11/12 mx-auto">
+            {bills.map((bill) => (
+              <div
+                key={bill._id}
+                className={`border rounded-2xl p-4 shadow-md hover:shadow-xl transition transform hover:-translate-y-1 
         ${
           darkMode
             ? "bg-gray-900 border-gray-700 text-gray-100"
             : "bg-white border-gray-200 text-gray-800"
         }
         flex flex-col justify-between`}
-            >
-              {/* Image */}
-              <div className="relative">
-                <img
-                  src={bill.image}
-                  alt={bill.title}
-                  className="w-full h-36 object-cover rounded-xl mb-4"
-                />
-                {/* Category badge */}
-                <span
-                  className={`absolute top-2 left-2 text-xs px-4 py-1 rounded-full shadow 
+              >
+                {/* Image */}
+                <div className="relative">
+                  <img
+                    src={bill.image}
+                    alt={bill.title}
+                    className="w-full h-36 object-cover rounded-xl mb-4"
+                  />
+                  {/* Category badge */}
+                  <span
+                    className={`absolute top-2 left-2 text-xs px-4 py-1 rounded-full shadow 
           ${
             darkMode ? "bg-orange-500 text-white" : " bg-orange-600 text-white"
           }`}
+                  >
+                    {bill.category}
+                  </span>
+                </div>
+
+                {/* Title */}
+                <h3
+                  className={`text-lg font-semibold mb-3 ${
+                    darkMode ? "text-white" : "text-gray-900"
+                  }`}
                 >
-                  {bill.category}
-                </span>
-              </div>
+                  {bill.title}
+                </h3>
 
-              {/* Title */}
-              <h3
-                className={`text-lg font-semibold mb-3 ${
-                  darkMode ? "text-white" : "text-gray-900"
-                }`}
-              >
-                {bill.title}
-              </h3>
-
-              {/* Info  */}
-              <div className="flex justify-between items-center mb-4 text-sm">
-                <div className="flex items-center gap-1">
-                  <FaMapMarkerAlt
-                    className={`${darkMode ? "text-red-400" : "text-red-500"}`}
-                  />
-                  <span
-                    className={`${
-                      darkMode ? "text-gray-300" : "text-gray-600"
-                    }`}
-                  >
-                    {bill.location}
-                  </span>
+                {/* Info  */}
+                <div className="flex justify-between items-center mb-4 text-sm">
+                  <div className="flex items-center gap-1">
+                    <FaMapMarkerAlt
+                      className={`${
+                        darkMode ? "text-red-400" : "text-red-500"
+                      }`}
+                    />
+                    <span
+                      className={`${
+                        darkMode ? "text-gray-300" : "text-gray-600"
+                      }`}
+                    >
+                      {bill.location}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <FaDollarSign
+                      className={`${
+                        darkMode ? "text-green-400" : "text-green-500"
+                      }`}
+                    />
+                    <span
+                      className={`text-[16px] font-semibold ${
+                        darkMode ? "text-gray-300" : "text-gray-600"
+                      }`}
+                    >
+                      {bill.amount}
+                    </span>
+                  </div>
                 </div>
-                <div className="flex items-center gap-1">
-                  <FaDollarSign
-                    className={`${
-                      darkMode ? "text-green-400" : "text-green-500"
-                    }`}
-                  />
-                  <span
-                    className={`text-[16px] font-semibold ${
-                      darkMode ? "text-gray-300" : "text-gray-600"
-                    }`}
-                  >
-                    {bill.amount}
-                  </span>
-                </div>
-              </div>
 
-              {/* Button */}
-              <Link to={`/bills/${bill._id}`}>
-                <button
-                  className={`w-full py-2 rounded-lg transition
+                {/* Button */}
+                <Link to={`/bills/${bill._id}`}>
+                  <button
+                    className={`w-full py-2 rounded-lg transition
         ${
           darkMode
             ? "bg-blue-600 hover:bg-blue-700 text-white"
             : "bg-blue-600 hover:bg-blue-700 text-white"
         }`}
-                >
-                  See Details
-                </button>
-              </Link>
-            </div>
-          ))}
-        </div>
+                  >
+                    See Details
+                  </button>
+                </Link>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
