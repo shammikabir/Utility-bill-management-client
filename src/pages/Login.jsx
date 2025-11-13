@@ -61,14 +61,14 @@ const Login = () => {
 
   return (
     <div
-      className={`min-h-screen flex items-center justify-center p-6 ${
+      className={`min-h-screen flex items-center justify-center p-4 ${
         darkMode
           ? "bg-linear-to-br from-[#0F2027] via-[#203A43] to-[#2C5364] text-gray-100"
           : "bg-linear-to-br from-[#e0ecff] via-[#f7faff] to-[#cfdcff] text-gray-900"
       }`}
     >
       <div
-        className={`w-full max-w-5xl rounded-3xl overflow-hidden shadow-2xl grid md:grid-cols-2 transition-all duration-500 ${
+        className={`w-full max-w-4xl rounded-3xl overflow-hidden shadow-2xl grid md:grid-cols-2 transition-all duration-500 ${
           darkMode ? "bg-[#1B262C]" : "bg-white"
         }`}
       >
@@ -85,7 +85,7 @@ const Login = () => {
           <img
             src={loginimg}
             alt="Login Visual"
-            className="relative w-[85%] drop-shadow-2xl animate-float"
+            className="relative w-full drop-shadow-2xl animate-float"
           />
         </div>
 
@@ -98,13 +98,6 @@ const Login = () => {
           >
             Welcome Back 👋
           </h1>
-          <p
-            className={`text-center mb-10 text-sm ${
-              darkMode ? "text-gray-400" : "text-gray-600"
-            }`}
-          >
-            Login to manage your utility bills securely and quickly.
-          </p>
 
           <form onSubmit={handleLogin} className="space-y-6">
             {/* Email */}
@@ -174,7 +167,7 @@ const Login = () => {
             {/* Login Button */}
             <button
               type="submit"
-              className={`w-full py-3 rounded-xl text-white font-semibold shadow-md transform transition-all hover:scale-105 ${
+              className={`w-full py-2 rounded-xl libre-baskerville-bold  text-white  shadow-md transform transition-all hover:scale-105 ${
                 darkMode
                   ? "bg-linear-to-r from-[#e93d11] to-[#FFB347]"
                   : "bg-linear-to-r from-[#004AAD] to-[#007BFF]"
@@ -187,7 +180,7 @@ const Login = () => {
             <button
               type="button"
               onClick={handleGoogleSignin}
-              className="flex items-center justify-center gap-3 border border-gray-300 bg-white text-gray-700 px-5 py-3 rounded-xl w-full font-medium hover:bg-gray-100 transition-all duration-300 shadow-sm"
+              className="flex items-center justify-center gap-3 border border-gray-300 bg-white text-gray-700 px-5 py-2 rounded-xl w-full font-medium hover:bg-gray-100 transition-all duration-300 shadow-sm"
             >
               <img
                 src="https://www.svgrepo.com/show/475656/google-color.svg"
@@ -196,13 +189,6 @@ const Login = () => {
               />
               Continue with Google
             </button>
-
-            {/* Divider */}
-            <div className="flex items-center justify-center my-4">
-              <div className="flex-1 h-px bg-gray-300"></div>
-              <span className="px-3 text-gray-400 text-sm">OR</span>
-              <div className="flex-1 h-px bg-gray-300"></div>
-            </div>
 
             {/* Register Link */}
             <p className="text-center text-sm">

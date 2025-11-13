@@ -39,9 +39,7 @@ function BillsPage() {
   return (
     <section
       className={`py-5  md:px-12 transition-colors  duration-500 ${
-        darkMode
-          ? "bg-linear-to-r from-gray-950 via-gray-900 to-gray-950  text-gray-100"
-          : "bg-white text-gray-800"
+        darkMode ? "bg-gray-900  text-gray-100" : "bg-gray-100 text-gray-800"
       }`}
     >
       <div className="p-6">
@@ -93,7 +91,7 @@ function BillsPage() {
         {loading ? (
           <Loading></Loading>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-11/12 mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-11/12 mb-20 mx-auto">
             {bills.map((bill) => (
               <div
                 key={bill._id}
@@ -106,18 +104,22 @@ function BillsPage() {
         flex flex-col justify-between`}
               >
                 {/* Image */}
+
                 <div className="relative">
                   <img
                     src={bill.image}
                     alt={bill.title}
                     className="w-full h-36 object-cover rounded-xl mb-4"
                   />
+
+                  {/* Overlay */}
+                  {/* <div className="absolute inset-0 bg-black/25 rounded-xl"></div> */}
+                  {/* bg-black/25 gives 25% black opacity overlay */}
+
                   {/* Category badge */}
                   <span
                     className={`absolute top-2 left-2 text-xs px-4 py-1 rounded-full shadow 
-          ${
-            darkMode ? "bg-orange-500 text-white" : " bg-orange-600 text-white"
-          }`}
+      ${darkMode ? "bg-orange-500 text-white" : "bg-orange-600 text-white"}`}
                   >
                     {bill.category}
                   </span>
@@ -170,8 +172,8 @@ function BillsPage() {
                     className={`w-full py-2 rounded-lg transition
         ${
           darkMode
-            ? "bg-blue-600 hover:bg-blue-700 text-white"
-            : "bg-blue-600 hover:bg-blue-700 text-white"
+            ? "bg-linear-to-r from-[#004AAD] to-[#007BFF] hover:opacity-90 text-white"
+            : "bg-linear-to-r from-[#004AAD] to-[#007BFF] hover:opacity-90 text-white"
         }`}
                   >
                     See Details

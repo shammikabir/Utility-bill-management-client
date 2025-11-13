@@ -96,8 +96,8 @@ const Register = () => {
           <div
             className={`absolute inset-0 ${
               darkMode
-                ? "bg-linear-to-br from-[#D2E3FF] to-[#A9C9FF]"
-                : "bg-linear-to-br from-[#D2E3FF] to-[#A9C9FF]"
+                ? "bg-linear-to-br from-[#ff9a44] via-[#ff7842] to-[#ff6b6b]"
+                : "bg-linear-to-br from-[#004AAD] via-[#007BFF] to-[#4FC3F7]"
             }`}
             style={{
               borderBottomRightRadius: "150px",
@@ -206,27 +206,20 @@ const Register = () => {
             {/* Register Button */}
             <button
               type="submit"
-              className={`w-full py-2 rounded-lg text-white font-medium text-sm transition-transform transform hover:scale-105 shadow-md ${
+              className={`w-full py-2 rounded-lg text-white font-medium text-sm libre-baskerville-bold transition-transform transform hover:scale-105 shadow-md ${
                 darkMode
-                  ? "bg-linear-to-r from-[#FF7E5F] to-[#FFB347] hover:opacity-90"
+                  ? "bg-linear-to-r from-[#ef5129] to-[#FFB347] hover:opacity-90"
                   : "bg-linear-to-r from-[#004AAD] to-[#007BFF] hover:opacity-90"
               }`}
             >
               Register
             </button>
 
-            {/* Divider */}
-            <div className="flex items-center my-3">
-              <div className="flex-grow h-px bg-gray-400"></div>
-              <span className="px-2 text-gray-500 text-xs">OR</span>
-              <div className="flex-grow h-px bg-gray-400"></div>
-            </div>
-
             {/* Google Sign-In */}
             <button
               type="button"
               onClick={handleGoogleSignin}
-              className={`flex items-center justify-center gap-2 w-full py-2 rounded-lg border text-sm font-semibold transition-transform transform hover:scale-105 ${
+              className={`flex items-center  justify-center gap-2 w-full py-2 rounded-lg border text-sm font-semibold transition-transform transform hover:scale-105 ${
                 darkMode
                   ? "bg-[#2C394B] border-gray-600 text-gray-200 hover:bg-[#33475E]"
                   : "bg-[#FFF9F3] border-gray-300 text-gray-900 hover:bg-gray-100"
@@ -241,7 +234,7 @@ const Register = () => {
             </button>
 
             {/* Login Link */}
-            <p className="text-center text-xs mt-3">
+            <p className="text-center text-xs mt-2">
               Already have an account?{" "}
               <Link
                 to="/auth/login"

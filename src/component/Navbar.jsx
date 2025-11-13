@@ -96,7 +96,7 @@ export default function Navbar() {
         </div>
 
         {/* ---------- DESKTOP MENU (lg only) ---------- */}
-        <ul className="hidden lg:flex gap-6 font-medium items-center libre-baskerville-bold text-lg">
+        <ul className="hidden lg:flex gap-6 text-[17px] items-center libre-baskerville-bold text-lg">
           <NavLink
             to="/"
             className={({ isActive }) =>

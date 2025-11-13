@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import ThemeContext from "../ThemeContext/ThemeContext";
 import { Link, useLoaderData } from "react-router";
-
+import { motion } from "framer-motion";
 import { FaTag, FaMapMarkerAlt, FaCalendarAlt, FaSearch } from "react-icons/fa";
 import { AuthContext } from "../Provider/AuthContext";
 import Loading from "../pages/Loading";
@@ -119,7 +119,7 @@ const RecentBills = () => {
                   className={`mt-auto w-full py-2 flex items-center justify-center gap-2 rounded-lg font-medium transition-all duration-200 ${
                     darkMode
                       ? "bg-orange-700 text-white hover:bg-orange-600"
-                      : "bg-blue-600 text-white hover:bg-blue-700"
+                      : "bg-linear-to-r from-[#004AAD] to-[#007BFF] hover:opacity-90 text-white"
                   }`}
                 >
                   <FaSearch /> See Details
