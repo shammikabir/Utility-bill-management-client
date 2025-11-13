@@ -9,13 +9,12 @@ import Footer from "../component/Footer";
 
 const Home = () => {
   return (
-    <div>
+    <div className="overflow-x-hidden">
       <Banner></Banner>
       <Categories></Categories>
       <RecentBiils></RecentBiils>
       <WhyChooseUs></WhyChooseUs>
       <FAQSection></FAQSection>
-      <Footer></Footer>
     </div>
   );
 };

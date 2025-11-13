@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthContext";
 import { FaEye } from "react-icons/fa";
 import { IoEyeOff } from "react-icons/io5";
@@ -12,30 +12,29 @@ const Login = () => {
   const [show, setShow] = useState(false);
   const [error, setError] = useState("");
   const { darkMode } = useContext(ThemeContext);
-  const { loginuser, setUser, setloading, signInWithEmailFunc } =
+  const { signIn, setUser, setloading, signInWithEmailFunc } =
     useContext(AuthContext);
   const [formData, setFormData] = useState({ email: "", password: "" });
   const navigate = useNavigate();
+  const location = useLocation();
   const from = location.state || "/";
 
   const handleLogin = (e) => {
     e.preventDefault();
-    const form = e.target;
-    const email = form.email.value;
-    const password = form.password.value;
+    const { email, password } = formData;
 
-    loginuser(email, password)
+    signIn(email, password)
       .then((result) => {
         setUser(result.user);
         setloading(false);
-        alert("Login Successful!");
+        toast.success("Login Successful 🎉");
         navigate("/");
       })
-      .catch((err) => {
+      .catch(() => {
         setError("Invalid email or password. Please try again.");
       });
   };
-  //google sign in
+
   const handleGoogleSignin = () => {
     signInWithEmailFunc()
       .then((res) => {
@@ -60,64 +59,57 @@ const Login = () => {
       });
   };
 
-  const handleForgetPassword = () => {
-    if (!formData.email) {
-      toast.error("Please enter your email first");
-      return;
-    }
-    navigate("/auth/forgot-password", { state: { email: formData.email } });
-  };
-
   return (
     <div
-      className={`min-h-screen flex items-center justify-center px-4 ${
+      className={`min-h-screen flex items-center justify-center p-6 ${
         darkMode
           ? "bg-linear-to-br from-[#0F2027] via-[#203A43] to-[#2C5364] text-gray-100"
-          : "bg-linear-to-br from-[#E8F1FF] via-[#F7FAFF] to-[#DDEBFF] text-gray-900"
+          : "bg-linear-to-br from-[#e0ecff] via-[#f7faff] to-[#cfdcff] text-gray-900"
       }`}
     >
       <div
-        className={`max-w-5xl w-full rounded-3xl shadow-2xl overflow-hidden grid md:grid-cols-2 ${
-          darkMode ? "bg-[#1B262C]" : "bg-[#F8FAFF]"
+        className={`w-full max-w-5xl rounded-3xl overflow-hidden shadow-2xl grid md:grid-cols-2 transition-all duration-500 ${
+          darkMode ? "bg-[#1B262C]" : "bg-white"
         }`}
       >
-        {/* Left Curved Image Section */}
-        <div className="hidden md:flex relative items-center justify-center">
+        {/* Left Image Section */}
+        <div className="hidden md:flex items-center justify-center relative overflow-hidden">
           <div
             className={`absolute inset-0 ${
               darkMode
-                ? "bg-linear-to-br from-[#D2E3FF] to-[#A9C9FF]"
-                : "bg-linear-to-br from-[#D2E3FF] to-[#A9C9FF]"
-            }`}
-            style={{
-              borderBottomRightRadius: "150px",
-            }}
+                ? "bg-linear-to-br from-[#ff9a44] via-[#ff7842] to-[#ff6b6b]"
+                : "bg-linear-to-br from-[#004AAD] via-[#007BFF] to-[#4FC3F7]"
+            } opacity-90`}
+            style={{ borderBottomRightRadius: "150px" }}
           ></div>
           <img
             src={loginimg}
             alt="Login Visual"
-            className="relative w-[85%] object-contain drop-shadow-lg"
+            className="relative w-[85%] drop-shadow-2xl animate-float"
           />
         </div>
 
         {/* Right Form Section */}
-        <div
-          className={`flex flex-col justify-center px-12 py-10 ${
-            darkMode ? "bg-[#1B262C]" : "bg-[#F8FAFF]"
-          }`}
-        >
+        <div className="flex flex-col justify-center px-10 md:px-12 py-12">
           <h1
-            className={`text-3xl text-center mb-6 libre-baskerville-bold ${
+            className={`text-4xl font-bold text-center mb-6 ${
               darkMode ? "text-[#FFB347]" : "text-[#004AAD]"
             }`}
           >
             Welcome Back 👋
           </h1>
+          <p
+            className={`text-center mb-10 text-sm ${
+              darkMode ? "text-gray-400" : "text-gray-600"
+            }`}
+          >
+            Login to manage your utility bills securely and quickly.
+          </p>
 
-          <form onSubmit={handleLogin} className="space-y-5">
+          <form onSubmit={handleLogin} className="space-y-6">
             {/* Email */}
             <div>
-              <label className="block mb-1 text-sm font-medium">Email</label>
+              <label className="block mb-1 text-sm font-semibold">Email</label>
               <input
                 name="email"
                 type="email"
@@ -126,10 +118,10 @@ const Login = () => {
                   setFormData({ ...formData, email: e.target.value })
                 }
                 placeholder="Enter your email"
-                className={`w-full rounded-lg px-3 py-2 border focus:ring-2 outline-none text-sm ${
+                className={`w-full rounded-xl px-4 py-3 border focus:ring-2 outline-none text-sm transition-all duration-300 ${
                   darkMode
                     ? "bg-[#2C394B] border-gray-600 text-gray-100 focus:ring-[#FFB347]"
-                    : "bg-white border-gray-300 text-gray-900 focus:ring-[#004AAD]"
+                    : "bg-white border-gray-300 focus:ring-[#004AAD]"
                 }`}
                 required
               />
@@ -137,7 +129,9 @@ const Login = () => {
 
             {/* Password */}
             <div className="relative">
-              <label className="block mb-1 text-sm font-medium">Password</label>
+              <label className="block mb-1 text-sm font-semibold">
+                Password
+              </label>
               <input
                 name="password"
                 type={show ? "text" : "password"}
@@ -146,29 +140,31 @@ const Login = () => {
                   setFormData({ ...formData, password: e.target.value })
                 }
                 placeholder="Enter your password"
-                className={`w-full rounded-lg px-3 py-2 border focus:ring-2 outline-none text-sm ${
+                className={`w-full rounded-xl px-4 py-3 border focus:ring-2 outline-none text-sm transition-all duration-300 ${
                   darkMode
                     ? "bg-[#2C394B] border-gray-600 text-gray-100 focus:ring-[#FFB347]"
-                    : "bg-white border-gray-300 text-gray-900 focus:ring-[#004AAD]"
+                    : "bg-white border-gray-300 focus:ring-[#004AAD]"
                 }`}
                 required
               />
               <span
                 onClick={() => setShow(!show)}
-                className="absolute right-3 top-9 cursor-pointer text-gray-400"
+                className="absolute right-4 top-10 cursor-pointer text-gray-400 hover:text-gray-600"
               >
                 {show ? <FaEye /> : <IoEyeOff />}
               </span>
             </div>
 
             {/* Error Message */}
-            {error && <p className="text-xs text-red-500">{error}</p>}
+            {error && (
+              <p className="text-xs text-red-500 text-center">{error}</p>
+            )}
+
             <div className="text-right">
               <button
                 type="button"
-                // onClick={handleForgetPassword}
-                className={`text-sm text-[#b24d34] hover:underline ${
-                  darkMode ? "text-white" : "text-orange-600"
+                className={`text-sm hover:underline ${
+                  darkMode ? "text-orange-300" : "text-[#004AAD]"
                 }`}
               >
                 Forgot Password?
@@ -178,19 +174,20 @@ const Login = () => {
             {/* Login Button */}
             <button
               type="submit"
-              className={`w-full py-2 rounded-lg text-white font-medium text-sm transition-transform transform hover:scale-105 shadow-md ${
+              className={`w-full py-3 rounded-xl text-white font-semibold shadow-md transform transition-all hover:scale-105 ${
                 darkMode
-                  ? "bg-linear-to-r from-[#e93d11] to-[#FFB347] hover:opacity-90"
-                  : "bg-linear-to-r from-[#004AAD] to-[#007BFF] hover:opacity-90"
+                  ? "bg-linear-to-r from-[#e93d11] to-[#FFB347]"
+                  : "bg-linear-to-r from-[#004AAD] to-[#007BFF]"
               }`}
             >
               Login
             </button>
 
+            {/* Google Login */}
             <button
               type="button"
               onClick={handleGoogleSignin}
-              className="flex items-center justify-center gap-3 border border-gray-300 bg-[#FFF9F3] text-gray-800 px-5 py-2 rounded-md w-full font-semibold hover:bg-gray-100 transition-colors"
+              className="flex items-center justify-center gap-3 border border-gray-300 bg-white text-gray-700 px-5 py-3 rounded-xl w-full font-medium hover:bg-gray-100 transition-all duration-300 shadow-sm"
             >
               <img
                 src="https://www.svgrepo.com/show/475656/google-color.svg"
@@ -201,18 +198,18 @@ const Login = () => {
             </button>
 
             {/* Divider */}
-            <div className="flex items-center my-3">
-              <div className=" h-px bg-gray-400"></div>
-              <span className="px-2 text-gray-500 text-xs">OR</span>
-              <div className="flex-grow h-px bg-gray-400"></div>
+            <div className="flex items-center justify-center my-4">
+              <div className="flex-1 h-px bg-gray-300"></div>
+              <span className="px-3 text-gray-400 text-sm">OR</span>
+              <div className="flex-1 h-px bg-gray-300"></div>
             </div>
 
             {/* Register Link */}
-            <p className="text-center text-xs">
+            <p className="text-center text-sm">
               Don’t have an account?{" "}
               <Link
                 to="/auth/register"
-                className={`font-medium underline ${
+                className={`font-semibold hover:underline ${
                   darkMode ? "text-[#FFB347]" : "text-[#004AAD]"
                 }`}
               >

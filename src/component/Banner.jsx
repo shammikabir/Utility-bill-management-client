@@ -73,7 +73,7 @@ const Banner = () => {
             className={`px-6 py-3 rounded-lg text-lg font-semibold transition ${
               darkMode
                 ? "bg-orange-500 hover:bg-orange-600 text-white shadow-lg"
-                : "bg-blue-600 hover:bg-blue-700 text-white shadow-md"
+                : "bg-linear-to-r from-[#004AAD] to-[#007BFF] hover:opacity-90 text-white"
             }`}
           >
             Read More

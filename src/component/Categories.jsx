@@ -55,7 +55,7 @@ const Categories = () => {
         <h2 className="text-4xl font-bold libre-baskerville-bold md:mt-20 md:mb-2 mt-5 mb-2">
           Choose Your <span className="text-blue-600">Category</span>
         </h2>
-        <p className="text-gray-500 text-lg md:text-[16px] md:mb-20 mb-10">
+        <p className="text-gray-500 text-lg md:text-[16px] md:mb-20 mb-10 md:mx-0 mx-4">
           Find the perfect utility service that suits your needs
         </p>
       </div>
@@ -64,7 +64,7 @@ const Categories = () => {
         data-aos="fade-up"
         data-aos-delay="200"
         data-aos-duration="800"
-        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-11/12 mx-auto"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-11/12 mx-auto"
       >
         {categories.map((cat, index) => (
           <div

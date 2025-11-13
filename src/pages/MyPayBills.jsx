@@ -62,12 +62,20 @@ const MyPayBills = () => {
       } min-h-screen p-6 transition-all`}
     >
       <h1
-        className={`text-3xl sm:text-4xl my-10 libre-baskerville-bold mb-8 text-center text-gray-800 ${
-          darkMode ? "text-white" : "text-blue-500"
+        className={`text-3xl sm:text-4xl my-4 libre-baskerville-bold text-center ${
+          darkMode ? "text-white" : "text-black"
         }`}
       >
         My Pay Bills
       </h1>
+      <p
+        className={`text-center text-sm sm:text-base mb-15 ${
+          darkMode ? "text-gray-300" : "text-gray-600"
+        }`}
+      >
+        View and manage all your paid bills easily. Download reports or update
+        your records anytime.
+      </p>
 
       {/* Summary Cards with images */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
@@ -124,7 +132,7 @@ const MyPayBills = () => {
 
       {/* Bills Table */}
       <div
-        className={`overflow-x-auto rounded-2xl shadow ${
+        className={`overflow-x-auto rounded-2xl shadow mb-20 ${
           darkMode ? "bg-gray-800" : "bg-white"
         }`}
       >

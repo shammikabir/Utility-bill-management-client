@@ -51,23 +51,24 @@ const PayBillModal = ({ bill, onClose }) => {
         toast.success("Payment Successful!");
         onClose();
       })
-      .catch(() => toast.error(" Something went wrong!"));
+      .catch(() => toast.error("Something went wrong!"));
   };
 
   return (
     <div
-      className={`fixed inset-0 flex justify-center items-center z-50 
-      ${darkMode ? "bg-black/60" : "bg-gray-400/40"} backdrop-blur-sm`}
+      className={`fixed inset-0 flex justify-center items-center z-50 bg-black/50 backdrop-blur-sm p-4 sm:p-8 `}
+      onClick={onClose} // Close on outside click
     >
       <div
-        className={`relative rounded-2xl shadow-2xl w-[95%] sm:w-[90%] md:w-[80%] lg:w-[580px]  p-8 border 
-        ${
-          darkMode
-            ? "bg-linear-to-b from-[#1E1E1E] to-[#121212] border-gray-700 text-gray-100"
-            : "bg-linear-to-b from-white to-[#f8f8f8] border-gray-200 text-gray-800"
-        }`}
+        onClick={(e) => e.stopPropagation()} // Prevent close when clicking inside
+        className={`relative rounded-2xl shadow-2xl w-full max-w-lg p-6 sm:p-8 border overflow-auto max-h-[90vh]
+          ${
+            darkMode
+              ? "bg-linear-to-b from-[#1E1E1E] to-[#121212] border-gray-700 text-gray-100"
+              : "bg-linear-to-b from-white to-[#f8f8f8] border-gray-200 text-gray-800"
+          }`}
       >
-        {/*  Close Button */}
+        {/* Close Button */}
         <button
           onClick={onClose}
           className={`absolute top-4 right-5 text-2xl transition ${
@@ -80,7 +81,7 @@ const PayBillModal = ({ bill, onClose }) => {
         </button>
 
         {/* Header */}
-        <div className="text-center mb-8">
+        <div className="text-center mb-6 sm:mb-8">
           <div className="flex justify-center mb-2">
             <FaCreditCard
               className={`text-4xl ${
@@ -89,7 +90,7 @@ const PayBillModal = ({ bill, onClose }) => {
             />
           </div>
           <h2
-            className={`text-3xl font-bold ${
+            className={`text-2xl sm:text-3xl font-bold libre-baskerville-bold  ${
               darkMode ? "text-orange-400" : "text-orange-600"
             }`}
           >
@@ -104,8 +105,7 @@ const PayBillModal = ({ bill, onClose }) => {
           </p>
         </div>
 
-        {/* 💡 Bill Info Section */}
-
+        {/* Bill Info */}
         <div
           className={`p-4 rounded-xl mb-6 ${
             darkMode ? "bg-[#2a2a2a]" : "bg-gray-100"
@@ -178,7 +178,7 @@ const PayBillModal = ({ bill, onClose }) => {
           </div>
         </div>
 
-        {/* ✏️ User Input Form */}
+        {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"
@@ -193,7 +193,6 @@ const PayBillModal = ({ bill, onClose }) => {
                 : "border-gray-300 bg-white text-gray-800"
             }`}
           />
-
           <input
             type="text"
             name="address"
@@ -207,7 +206,6 @@ const PayBillModal = ({ bill, onClose }) => {
                 : "border-gray-300 bg-white text-gray-800"
             }`}
           />
-
           <input
             type="text"
             name="phone"
@@ -221,7 +219,6 @@ const PayBillModal = ({ bill, onClose }) => {
                 : "border-gray-300 bg-white text-gray-800"
             }`}
           />
-
           <textarea
             name="additionalInfo"
             placeholder="Additional info (optional)"
@@ -234,14 +231,12 @@ const PayBillModal = ({ bill, onClose }) => {
                 : "border-gray-300 bg-white text-gray-800"
             }`}
           />
-
-          {/* 💰 Submit Button */}
           <button
             type="submit"
-            className={`w-full py-3 rounded-lg font-semibold shadow-md transition-all duration-300 ${
+            className={`w-full py-3 rounded-lg libre-baskerville-bold  shadow-md transition-all duration-300 ${
               darkMode
-                ? "bg-linear-to-r from-[#e93d11] to-[#FFB347]  text-white hover:opacity-80"
-                : "bg-linear-to-r from-[#004AAD] to-[#007BFF] hover:opacity-80 text-white "
+                ? "bg-linear-to-r from-[#e93d11] to-[#FFB347] text-white hover:opacity-80"
+                : "bg-linear-to-r from-[#004AAD] to-[#007BFF] hover:opacity-80 text-white"
             }`}
           >
             Confirm Payment

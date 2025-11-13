@@ -4,7 +4,7 @@ import { FaEye } from "react-icons/fa";
 import { IoEyeOff } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import ThemeContext from "../ThemeContext/ThemeContext";
-import toast from "daisyui/components/toast";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const [passError, setPassError] = useState("");
@@ -87,7 +87,7 @@ const Register = () => {
       }`}
     >
       <div
-        className={`max-w-5xl w-full rounded-3xl shadow-2xl overflow-hidden grid md:grid-cols-2 ${
+        className={`max-w-5xl w-full rounded-3xl shadow-2xl overflow-hidden grid my-20 md:grid-cols-2 ${
           darkMode ? "bg-[#1B262C]" : "bg-[#F8FAFF]"
         }`}
       >

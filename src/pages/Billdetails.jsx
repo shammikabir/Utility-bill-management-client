@@ -11,6 +11,8 @@ import ThemeContext from "../ThemeContext/ThemeContext";
 import PayBillModal from "../component/PayBillModal";
 import ErrorBills from "./ErrorBills";
 import Loading from "./Loading";
+import { RiBillFill } from "react-icons/ri";
+import { ImCross } from "react-icons/im";
 
 const Billdetails = () => {
   const { id } = useParams();
@@ -58,7 +60,7 @@ const Billdetails = () => {
       className={`min-h-screen py-12 px-4 flex justify-center items-center ${
         darkMode
           ? "bg-[#0f0f0f] text-gray-100"
-          : "bg-gradient-to-b from-[#F3F8FF] via-[#FFFFFF] to-[#EDEADE] text-gray-800"
+          : "bg-linear-to-b from-[#F3F8FF] via-[#FFFFFF] to-[#EDEADE] text-gray-800"
       }`}
     >
       <div
@@ -73,18 +75,18 @@ const Billdetails = () => {
             alt={bill.title}
             className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+          <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent"></div>
 
           {/* Back Button */}
           <Link
             to="/bills"
-            className="absolute top-4 left-4 bg-white/90 text-gray-700 px-3 py-1.5 rounded-full flex items-center gap-2 text-sm shadow hover:bg-white"
+            className="absolute top-4 left-4 bg-orange-600 text-white px-3 py-1.5 rounded-full flex items-center gap-2 text-sm shadow hover:shadow-lg"
           >
             <FaArrowLeft /> Back
           </Link>
 
           {/* Title */}
-          <h2 className="absolute bottom-6 left-6 text-3xl md:text-4xl font-bold text-white drop-shadow-lg">
+          <h2 className="absolute bottom-6 left-6 text-3xl md:text-4xl text-white drop-shadow-lg libre-baskerville-bold">
             {bill.title}
           </h2>
         </div>
@@ -126,7 +128,7 @@ const Billdetails = () => {
 
           {/* Description */}
           <div>
-            <h3 className="text-lg font-semibold mb-2 text-blue-600">
+            <h3 className="text-lg font-semibold mb-2 text-blue-600 libre-baskerville-bold">
               Description
             </h3>
             <p className="leading-relaxed text-justify text-gray-600 dark:text-gray-300">
@@ -140,15 +142,21 @@ const Billdetails = () => {
             <button
               disabled={!isCurrentMonth}
               onClick={() => setShowModal(true)}
-              className={`px-8 py-3 rounded-xl font-semibold shadow-lg transition-all duration-300 ${
+              className={`px-8 py-3 rounded-xl font-semibold shadow-lg transition-all libre-baskerville-bold duration-300 ${
                 isCurrentMonth
-                  ? "bg-gradient-to-r from-green-500 to-green-600 text-white hover:scale-105 hover:shadow-xl"
+                  ? "bg-linear-to-r from-[#004AAD] to-[#007BFF] hover:opacity-90 text-white hover:shadow-xl"
                   : "bg-gray-400 text-gray-200 cursor-not-allowed"
               }`}
             >
-              {isCurrentMonth
-                ? "💳 Pay Bill"
-                : "❌ Only current month bills can be paid"}
+              {isCurrentMonth ? (
+                <span className="flex items-center gap-2">
+                  <RiBillFill size={20} /> Pay Bill
+                </span>
+              ) : (
+                <span className="flex items-center gap-2 text-red-500">
+                  <ImCross /> Only current month bills can be paid
+                </span>
+              )}
             </button>
           </div>
         </div>

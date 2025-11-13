@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import ThemeContext from "../ThemeContext/ThemeContext";
 import { Link, useLoaderData } from "react-router";
-import { motion } from "framer-motion";
+
 import { FaTag, FaMapMarkerAlt, FaCalendarAlt, FaSearch } from "react-icons/fa";
 import { AuthContext } from "../Provider/AuthContext";
 import Loading from "../pages/Loading";
@@ -35,7 +35,7 @@ const RecentBills = () => {
         </motion.h2>
 
         <motion.p
-          className="text-gray-500 dark:text-gray-400 text-lg md:text-[16px] md:mb-20 mb-10"
+          className="text-gray-500 dark:text-gray-400 text-lg md:text-[16px] md:mb-20 md:mx-0 mx-4 mb-10"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
@@ -45,7 +45,7 @@ const RecentBills = () => {
       </div>
 
       {/* Bills List */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 w-10/12 mx-auto mt-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-10/12 mx-auto mt-8">
         {bills.map((bill, index) => (
           <motion.div
             key={bill._id}

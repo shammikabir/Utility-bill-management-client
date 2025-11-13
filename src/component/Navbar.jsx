@@ -1,7 +1,6 @@
 import { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { FiMenu, FiX, FiSun, FiMoon, FiLogOut } from "react-icons/fi";
-import { FaBolt } from "react-icons/fa";
 import ThemeContext from "../ThemeContext/ThemeContext";
 import { AuthContext } from "../Provider/AuthContext";
 import Swal from "sweetalert2";
@@ -46,46 +45,69 @@ export default function Navbar() {
     <div
       className={`${
         darkMode
-          ? "bg-gradient-to-r from-gray-950 via-gray-900 to-gray-950 text-gray-100"
+          ? "bg-linear-to-r from-gray-950 via-gray-900 to-gray-950 text-gray-100"
           : "bg-white text-gray-800"
       } transition-colors duration-500 shadow-md`}
     >
-      <nav className="flex justify-between items-center w-10/12 mx-auto py-4">
+      <nav className="flex justify-between items-center lg:mx-25 mx-4 py-4 md:py-5">
         {/* ---------- LOGO ---------- */}
         <div className="flex items-center gap-2 text-2xl font-bold select-none">
           <div
-            className={`w-10 h-10 flex items-center justify-center rounded-xl shadow-md ${
+            className={`relative w-10 h-10 rounded-xl flex items-center justify-center shadow-md ${
               darkMode
-                ? "bg-orange-500 text-gray-900"
-                : "bg-blue-600 text-white"
+                ? "bg-orange-500/90"
+                : "bg-gradient-to-r from-[#004AAD] to-[#007BFF]"
             }`}
           >
-            <FaBolt className="text-2xl" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="white"
+              className="w-6 h-6"
+            >
+              <path d="M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h6.586a1 1 0 0 0 .707-.293l6.414-6.414A1 1 0 0 0 20 14.586V4a2 2 0 0 0-2-2H6zm8 15v3.586L17.586 17H14a1 1 0 0 0-1 1zm-6-9h8v2H8V8zm0 4h5v2H8v-2z" />
+            </svg>
+            <div className="absolute -bottom-1 -right-1 bg-[#FF8A3D] rounded-full p-[2px]">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-3 h-3 text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="white"
+                strokeWidth="3"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+            </div>
           </div>
           <span
-            className={`text-2xl font-extrabold ${
+            className={`text-2xl libre-baskerville-bold font-extrabold ${
               darkMode
-                ? "text-transparent bg-clip-text bg-gradient-to-r from-orange-300 to-yellow-500"
-                : "text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400"
+                ? "text-transparent bg-clip-text bg-linear-to-r from-orange-300 to-yellow-500"
+                : "text-transparent bg-clip-text bg-linear-to-r from-orange-700 to-yellow-600"
             }`}
           >
-            PowerPay
+            UtilityEase
           </span>
         </div>
 
-        {/* ---------- DESKTOP MENU ---------- */}
-        <ul className="hidden md:flex gap-8 font-medium items-center">
+        {/* ---------- DESKTOP MENU (lg only) ---------- */}
+        <ul className="hidden lg:flex gap-6 font-medium items-center libre-baskerville-bold text-lg">
           <NavLink
             to="/"
             className={({ isActive }) =>
-              `cursor-pointer transition-all ${
+              `cursor-pointer transition-all px-2 py-1 rounded-md ${
                 isActive
                   ? darkMode
                     ? "text-orange-400"
                     : "text-blue-600"
                   : darkMode
-                  ? "hover:text-orange-400"
-                  : "hover:text-blue-600"
+                  ? "hover:text-orange-400 hover:bg-gray-700/30"
+                  : "hover:text-blue-600 hover:bg-gray-100"
               }`
             }
           >
@@ -95,73 +117,37 @@ export default function Navbar() {
           <NavLink
             to="/bills"
             className={({ isActive }) =>
-              `cursor-pointer transition-all ${
+              `cursor-pointer transition-all px-2 py-1 rounded-md ${
                 isActive
                   ? darkMode
                     ? "text-orange-400"
                     : "text-blue-600"
                   : darkMode
-                  ? "hover:text-orange-400"
-                  : "hover:text-blue-600"
+                  ? "hover:text-orange-400 hover:bg-gray-700/30"
+                  : "hover:text-blue-600 hover:bg-gray-100"
               }`
             }
           >
             Bills
           </NavLink>
 
-          {user ? (
+          {user && (
             <NavLink
               to="/myPaybills"
               className={({ isActive }) =>
-                `cursor-pointer transition-all ${
+                `cursor-pointer transition-all px-2 py-1 rounded-md ${
                   isActive
                     ? darkMode
                       ? "text-orange-400"
                       : "text-blue-600"
                     : darkMode
-                    ? "hover:text-orange-400"
-                    : "hover:text-blue-600"
+                    ? "hover:text-orange-400 hover:bg-gray-700/30"
+                    : "hover:text-blue-600 hover:bg-gray-100"
                 }`
               }
             >
               My Pay Bills
             </NavLink>
-          ) : (
-            <>
-              <NavLink
-                to="/auth/login"
-                className={({ isActive }) =>
-                  `cursor-pointer transition-all ${
-                    isActive
-                      ? darkMode
-                        ? "text-orange-400"
-                        : "text-blue-600"
-                      : darkMode
-                      ? "hover:text-orange-400"
-                      : "hover:text-blue-600"
-                  }`
-                }
-              >
-                Login
-              </NavLink>
-
-              <NavLink
-                to="/auth/register"
-                className={({ isActive }) =>
-                  `cursor-pointer transition-all ${
-                    isActive
-                      ? darkMode
-                        ? "text-orange-400"
-                        : "text-blue-600"
-                      : darkMode
-                      ? "hover:text-orange-400"
-                      : "hover:text-blue-600"
-                  }`
-                }
-              >
-                Register
-              </NavLink>
-            </>
           )}
 
           {/* Theme Toggle */}
@@ -178,7 +164,7 @@ export default function Navbar() {
               <img
                 src={user?.photoURL || ""}
                 alt="User"
-                className="w-13 h-13 rounded-full border border-gray-400 shadow-md cursor-pointer object-cover"
+                className="w-12 h-12 rounded-full border border-gray-400 shadow-md cursor-pointer object-cover"
               />
               <div className="absolute left-1/2 -translate-x-1/2 top-12 bg-gray-800 text-white text-sm px-3 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
                 {user?.displayName || "User"}
@@ -188,19 +174,16 @@ export default function Navbar() {
 
           {user && (
             <button
-              onClick={() => {
-                handleLogout();
-                setMenuOpen(false);
-              }}
-              className="flex items-center gap-1 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
+              onClick={handleLogout}
+              className="flex items-center gap-1 px-4 py-2 bg-linear-to-r from-[#ef3a0d] to-[#ff6f47] text-white rounded-lg hover:bg-red-600 transition"
             >
               <FiLogOut /> Logout
             </button>
           )}
         </ul>
 
-        {/* ---------- MOBILE RIGHT SIDE ---------- */}
-        <div className="flex items-center gap-3 md:hidden">
+        {/* ---------- MOBILE + MD MENU TOGGLE ---------- */}
+        <div className="flex items-center gap-3 lg:hidden">
           {user && (
             <img
               src={user?.photoURL || ""}
@@ -220,24 +203,24 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* ---------- MOBILE MENU ---------- */}
+      {/* ---------- MOBILE + MD MENU ---------- */}
       {menuOpen && (
         <div
-          className={`md:hidden ${
+          className={`lg:hidden ${
             darkMode ? "bg-gray-800 text-gray-100" : "bg-white text-gray-800"
           } shadow-lg px-6 py-4 space-y-3 transition-all duration-300`}
         >
           <NavLink
             to="/"
             onClick={() => setMenuOpen(false)}
-            className="block hover:pl-2 transition-all"
+            className="block py-2 px-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-all"
           >
             Home
           </NavLink>
           <NavLink
             to="/bills"
             onClick={() => setMenuOpen(false)}
-            className="block hover:pl-2 transition-all"
+            className="block py-2 px-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-all"
           >
             Bills
           </NavLink>
@@ -245,31 +228,29 @@ export default function Navbar() {
             <NavLink
               to="/myPaybills"
               onClick={() => setMenuOpen(false)}
-              className="block hover:pl-2 transition-all"
+              className="block py-2 px-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-all"
             >
               My Pay Bills
             </NavLink>
           )}
 
-          <div className="flex items-center justify-between mt-3">
-            {user ? (
-              <button
-                onClick={() => {
-                  handleLogout();
-                  setMenuOpen(false);
-                }}
-                className="flex items-center gap-1 px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600 text-sm"
-              >
-                <FiLogOut /> Logout
+          {user ? (
+            <button
+              onClick={() => {
+                handleLogout();
+                setMenuOpen(false);
+              }}
+              className="flex items-center gap-1 px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600"
+            >
+              <FiLogOut /> Logout
+            </button>
+          ) : (
+            <NavLink to="/auth/login">
+              <button className="w-1/3 bg-blue-600 text-white py-1 rounded-lg hover:bg-blue-700">
+                Login
               </button>
-            ) : (
-              <NavLink to="/auth/login">
-                <button className="w-1/3 bg-blue-600 text-white py-1 rounded-lg hover:bg-blue-700 text-sm">
-                  Login
-                </button>
-              </NavLink>
-            )}
-          </div>
+            </NavLink>
+          )}
         </div>
       )}
     </div>

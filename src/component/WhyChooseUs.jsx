@@ -5,7 +5,6 @@ import {
   FaMobileAlt,
 } from "react-icons/fa";
 import { useContext } from "react";
-import { motion } from "framer-motion";
 
 import ThemeContext from "../ThemeContext/ThemeContext";
 import chooseImage from "../assets/WhatsApp_Image_2025-11-09_at_11.36.55_PM-removebg-preview.png";
