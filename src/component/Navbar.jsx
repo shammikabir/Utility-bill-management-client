@@ -131,23 +131,81 @@ export default function Navbar() {
             Bills
           </NavLink>
 
-          {user && (
-            <NavLink
-              to="/myPaybills"
-              className={({ isActive }) =>
-                `cursor-pointer transition-all px-2 py-1 rounded-md ${
-                  isActive
-                    ? darkMode
-                      ? "text-orange-400"
-                      : "text-blue-600"
-                    : darkMode
-                    ? "hover:text-orange-400 hover:bg-gray-700/30"
-                    : "hover:text-blue-600 hover:bg-gray-100"
-                }`
-              }
-            >
-              My Pay Bills
-            </NavLink>
+          {!user ? (
+            <>
+              <NavLink
+                to="/auth/login"
+                className={({ isActive }) =>
+                  `cursor-pointer transition-all px-2 py-1 rounded-md ${
+                    isActive
+                      ? darkMode
+                        ? "text-orange-400"
+                        : "text-blue-600"
+                      : darkMode
+                      ? "hover:text-orange-400 hover:bg-gray-700/30"
+                      : "hover:text-blue-600 hover:bg-gray-100"
+                  }`
+                }
+              >
+                Login
+              </NavLink>
+
+              <NavLink
+                to="/auth/register"
+                className={({ isActive }) =>
+                  `cursor-pointer transition-all px-2 py-1 rounded-md ${
+                    isActive
+                      ? darkMode
+                        ? "text-orange-400"
+                        : "text-blue-600"
+                      : darkMode
+                      ? "hover:text-orange-400 hover:bg-gray-700/30"
+                      : "hover:text-blue-600 hover:bg-gray-100"
+                  }`
+                }
+              >
+                Register
+              </NavLink>
+            </>
+          ) : (
+            <>
+              <NavLink
+                to="/myPaybills"
+                className={({ isActive }) =>
+                  `cursor-pointer transition-all px-2 py-1 rounded-md ${
+                    isActive
+                      ? darkMode
+                        ? "text-orange-400"
+                        : "text-blue-600"
+                      : darkMode
+                      ? "hover:text-orange-400 hover:bg-gray-700/30"
+                      : "hover:text-blue-600 hover:bg-gray-100"
+                  }`
+                }
+              >
+                My Pay Bills
+              </NavLink>
+
+              {/* User Info */}
+              <div className="relative group">
+                <img
+                  src={user?.photoURL || ""}
+                  alt="User"
+                  className="w-12 h-12 rounded-full border border-gray-400 shadow-md cursor-pointer object-cover"
+                />
+                <div className="absolute left-1/2 -translate-x-1/2 top-12 bg-gray-800 text-white text-sm px-3 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+                  {user?.displayName || "User"}
+                </div>
+              </div>
+
+              {/* Logout Button */}
+              <button
+                onClick={handleLogout}
+                className="flex items-center gap-1 px-4 py-2 bg-linear-to-r from-[#ef3a0d] to-[#ff6f47] text-white rounded-lg hover:bg-red-600 transition"
+              >
+                <FiLogOut /> Logout
+              </button>
+            </>
           )}
 
           {/* Theme Toggle */}
@@ -157,29 +215,6 @@ export default function Navbar() {
           >
             {darkMode ? <FiSun /> : <FiMoon />}
           </button>
-
-          {/* User Info */}
-          {user && (
-            <div className="relative group">
-              <img
-                src={user?.photoURL || ""}
-                alt="User"
-                className="w-12 h-12 rounded-full border border-gray-400 shadow-md cursor-pointer object-cover"
-              />
-              <div className="absolute left-1/2 -translate-x-1/2 top-12 bg-gray-800 text-white text-sm px-3 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
-                {user?.displayName || "User"}
-              </div>
-            </div>
-          )}
-
-          {user && (
-            <button
-              onClick={handleLogout}
-              className="flex items-center gap-1 px-4 py-2 bg-linear-to-r from-[#ef3a0d] to-[#ff6f47] text-white rounded-lg hover:bg-red-600 transition"
-            >
-              <FiLogOut /> Logout
-            </button>
-          )}
         </ul>
 
         {/* ---------- MOBILE + MD MENU TOGGLE ---------- */}
@@ -224,32 +259,54 @@ export default function Navbar() {
           >
             Bills
           </NavLink>
-          {user && (
-            <NavLink
-              to="/myPaybills"
-              onClick={() => setMenuOpen(false)}
-              className="block py-2 px-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-all"
-            >
-              My Pay Bills
-            </NavLink>
-          )}
 
-          {user ? (
-            <button
-              onClick={() => {
-                handleLogout();
-                setMenuOpen(false);
-              }}
-              className="flex items-center gap-1 px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600"
-            >
-              <FiLogOut /> Logout
-            </button>
-          ) : (
-            <NavLink to="/auth/login">
-              <button className="w-1/3 bg-blue-600 text-white py-1 rounded-lg hover:bg-blue-700">
+          {!user ? (
+            <>
+              <NavLink
+                to="/auth/login"
+                onClick={() => setMenuOpen(false)}
+                className="block py-2 px-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-all"
+              >
                 Login
+              </NavLink>
+
+              <NavLink
+                to="/auth/register"
+                onClick={() => setMenuOpen(false)}
+                className="block py-2 px-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-all"
+              >
+                Register
+              </NavLink>
+            </>
+          ) : (
+            <>
+              <NavLink
+                to="/myPaybills"
+                onClick={() => setMenuOpen(false)}
+                className="block py-2 px-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-all"
+              >
+                My Pay Bills
+              </NavLink>
+
+              <div className="flex items-center gap-2 mt-2">
+                <img
+                  src={user?.photoURL || ""}
+                  alt="User"
+                  className="w-9 h-9 rounded-full border border-gray-400 shadow-md object-cover"
+                />
+                <span>{user?.displayName || "User"}</span>
+              </div>
+
+              <button
+                onClick={() => {
+                  handleLogout();
+                  setMenuOpen(false);
+                }}
+                className="flex items-center gap-1 px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600 mt-2"
+              >
+                <FiLogOut /> Logout
               </button>
-            </NavLink>
+            </>
           )}
         </div>
       )}

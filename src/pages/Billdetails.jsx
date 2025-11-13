@@ -149,12 +149,13 @@ const Billdetails = () => {
               }`}
             >
               {isCurrentMonth ? (
-                <span className="flex items-center gap-2">
+                <span className="flex items-center gap-2 ">
                   <RiBillFill size={20} /> Pay Bill
                 </span>
               ) : (
-                <span className="flex items-center gap-2 text-red-500">
-                  <ImCross /> Only current month bills can be paid
+                <span className="flex items-center gap-2 ">
+                  <ImCross className="text-red-600" /> Only current month bills
+                  can be paid
                 </span>
               )}
             </button>
