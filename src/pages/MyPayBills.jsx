@@ -18,7 +18,7 @@ const MyPayBills = () => {
 
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:3000/myBills/${user.email}`)
+      fetch(`https://utility-server-two.vercel.app/myBills/${user.email}`)
         .then((res) => res.json())
         .then((data) => {
           if (data.success) setBills(data.result);

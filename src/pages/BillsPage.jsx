@@ -13,7 +13,7 @@ function BillsPage() {
   const { loading } = useContext(AuthContext);
   //   all bills load
   useEffect(() => {
-    fetch("http://localhost:3000/allbills")
+    fetch("https://utility-server-two.vercel.app/allbills")
       .then((res) => res.json())
       .then((data) => setBills(data))
       .catch((err) => console.log(err));
@@ -25,12 +25,14 @@ function BillsPage() {
 
     if (value === "") {
       //all bills
-      fetch("http://localhost:3000/allbills")
+      fetch("https://utility-server-two.vercel.app/allbills")
         .then((res) => res.json())
         .then((data) => setBills(data));
     } else {
       // category filter
-      fetch(`http://localhost:3000/bills/filter?category=${value}`)
+      fetch(
+        `https://utility-server-two.vercel.app/bills/filter?category=${value}`
+      )
         .then((res) => res.json())
         .then((data) => setBills(data));
     }

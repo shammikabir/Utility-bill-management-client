@@ -18,7 +18,7 @@ const UpdateBills = ({
     e.preventDefault();
     const { _id, ...billData } = selectedBill;
 
-    fetch(`http://localhost:3000/myBills/${_id}`, {
+    fetch(`https://utility-server-two.vercel.app/myBills/${_id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(billData),
@@ -28,7 +28,7 @@ const UpdateBills = ({
         if (data.success) {
           toast.success("Bill updated!");
           setShowUpdateModal(false);
-          fetch(`http://localhost:3000/myBills/${user.email}`)
+          fetch(`https://utility-server-two.vercel.app/myBills/${user.email}`)
             .then((res) => res.json())
             .then((data) => {
               if (data.success) setBills(data.result);

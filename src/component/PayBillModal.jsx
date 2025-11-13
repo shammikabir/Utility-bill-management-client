@@ -45,7 +45,7 @@ const PayBillModal = ({ bill, onClose }) => {
       additionalInfo: formData.additionalInfo,
     };
 
-    fetch("http://localhost:3000/myBills", {
+    fetch("https://utility-server-two.vercel.app/myBills", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(paymentData),

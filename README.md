@@ -1,6 +1,6 @@
 # UtilityEase - Utility Bill Management System
 
-[Live Site URL](https://fancy-hummingbird-195dda.netlify.app/)
+[Live Site URL](https://brilliant-faun-84f16b.netlify.app/)
 
 **UtilityEase** is a MERN Stack-based web application that allows users to manage their monthly utility bills efficiently. Users can view, pay, and update bills securely while keeping track of their payment history. The system features a responsive UI, interactive features, and downloadable PDF reports of paid bills.
 

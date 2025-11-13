@@ -26,7 +26,7 @@ const Billdetails = () => {
     setLoading(true);
     setError(false);
 
-    fetch(`http://localhost:3000/allbills/${id}`)
+    fetch(`https://utility-server-two.vercel.app/allbills/${id}`)
       .then((res) => res.json())
       .then((data) => {
         if (data?.result && data.result._id) {

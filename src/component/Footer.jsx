@@ -10,7 +10,7 @@ const Footer = () => {
         {/* Brand Info */}
         <div>
           <div className="flex items-center gap-3 mb-3">
-            <h2 className="text-2xl font-bold text-orange-500">UtilityEase</h2>
+            <h2 className="text-2xl font-bold text-orange-400">UtilityEase</h2>
           </div>
           <p className="text-sm leading-relaxed text-gray-400">
             Simplify your utility bill payments with speed, security, and ease —

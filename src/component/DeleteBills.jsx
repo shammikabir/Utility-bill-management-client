@@ -12,7 +12,7 @@ const DeleteBills = ({
   const { darkMode } = useContext(ThemeContext);
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:3000/myBills/${id}`, {
+    fetch(`https://utility-server-two.vercel.app/myBills/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
