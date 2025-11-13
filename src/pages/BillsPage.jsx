@@ -114,7 +114,6 @@ function BillsPage() {
 
                   {/* Overlay */}
                   {/* <div className="absolute inset-0 bg-black/25 rounded-xl"></div> */}
-                  {/* bg-black/25 gives 25% black opacity overlay */}
 
                   {/* Category badge */}
                   <span
