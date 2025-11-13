@@ -1,16 +1,29 @@
-# React + Vite
+# UtilityEase - Utility Bill Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[Live Site URL](https://your-live-site-url.com)
 
-Currently, two official plugins are available:
+**UtilityEase** is a MERN Stack-based web application that allows users to manage their monthly utility bills efficiently. Users can view, pay, and update bills securely while keeping track of their payment history. The system features a responsive UI, interactive features, and downloadable PDF reports of paid bills.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## React Compiler
+- **Secure User Authentication:** Users can register, log in, and manage their accounts safely.
+- **Bill Management:** View all utility bills including Electricity, Gas, Water, and Internet.
+- **Pay Current Month Bills:** Users can pay only the bills for the current month securely.
+- **Update & Delete Bills:** Users can update or delete bills as needed.
+- **PDF Report Download:** Download a comprehensive PDF report of all paid bills.
+- **Responsive Design:** Fully responsive UI for desktop, tablet, and mobile devices.
+- **Search & Filter:** Easily search and filter bills by category for quick access.
+- **Smooth Animations:** Enhanced UI experience with hover effects, transitions, and modal animations.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Technologies Used
 
-## Expanding the ESLint configuration
+- **Frontend:** React, Tailwind CSS, React Icons, React Router
+- **Backend:** Node.js, Express.js
+- **Database:** MongoDB
+- **PDF Generation:** jsPDF & jspdf-autotable
+- **Authentication:** Firebase Auth
+- **Animations:** Tailwind CSS transitions, React Typewritter, and Animate On Scroll Library.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+**Author:** [SHAMIMA KABIR]

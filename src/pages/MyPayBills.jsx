@@ -123,7 +123,7 @@ const MyPayBills = () => {
         >
           <button
             onClick={handleDownloadPDF}
-            className="flex items-center gap-2 bg-linear-to-r from-blue-500 to-indigo-600 text-white py-3 px-6 rounded-xl font-semibold shadow-md hover:from-blue-600 hover:to-indigo-700 transition text-lg"
+            className="flex items-center gap-2 bg-linear-to-r from-blue-500 to-indigo-700 text-white py-3 px-6 rounded-xl font-semibold shadow-md hover:from-blue-600 hover:to-indigo-700 transition text-lg"
           >
             <FaDownload /> Download PDF
           </button>
@@ -183,18 +183,18 @@ const MyPayBills = () => {
                       setSelectedBill(bill);
                       setShowUpdateModal(true);
                     }}
-                    className="text-blue-600 hover:text-blue-800 p-3 mr-2 rounded-full bg-blue-100 hover:bg-blue-200 transition text-xl"
+                    className="text-blue-600 hover:text-blue-800 p-2 mr-2 rounded-full bg-blue-100 hover:bg-blue-200 transition "
                   >
-                    <FaEdit />
+                    <FaEdit size={17} />
                   </button>
                   <button
                     onClick={() => {
                       setSelectedBill(bill);
                       setShowDeleteModal(true);
                     }}
-                    className="text-red-600 hover:text-red-800 p-3 rounded-full bg-red-100 hover:bg-red-200 transition text-xl"
+                    className="text-red-600 hover:text-red-800 p-2 rounded-full bg-red-100 hover:bg-red-200 transition "
                   >
-                    <FaTrash />
+                    <FaTrash size={16} />
                   </button>
                 </td>
               </tr>

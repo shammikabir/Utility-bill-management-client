@@ -10,6 +10,7 @@ import {
   FaCalendarAlt,
 } from "react-icons/fa";
 import ThemeContext from "../ThemeContext/ThemeContext";
+import { useLocation, useNavigate } from "react-router";
 
 const PayBillModal = ({ bill, onClose }) => {
   const [formData, setFormData] = useState({
@@ -21,6 +22,9 @@ const PayBillModal = ({ bill, onClose }) => {
 
   const { user } = useContext(AuthContext);
   const { darkMode } = useContext(ThemeContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state || "/myPaybills";
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -50,6 +54,7 @@ const PayBillModal = ({ bill, onClose }) => {
       .then(() => {
         toast.success("Payment Successful!");
         onClose();
+        navigate(from);
       })
       .catch(() => toast.error("Something went wrong!"));
   };
